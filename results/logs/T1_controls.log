@@ -1,0 +1,7 @@
+[OK] controllo negativo P([4]): |F|=16, maxf=8, margine=0, tight, NON controesempio
+[OK] validatore: {{0},{1}} rifiutata (manca {0,1}); violazione: [(1, 2, 3)]
+[OK] detector frequenze: 2*maxf=2 < |F|=6 rilevato; verdetto finale correttamente False (non chiusa)
+[OK] accordo checker1/checker2 su 50/50 chiusure casuali (m=10, k<=6)
+[OK] closure(): 10/10 famiglie generate risultano chiuse al checker
+
+TUTTI I CONTROLLI SUPERATI

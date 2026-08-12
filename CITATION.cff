@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Frankl's union-closed sets conjecture under cyclic symmetry: SAT-certified results for Z13 and Z14"
+authors:
+  - family-names: Albanese
+    given-names: Simone
+type: software
+date-released: 2026-08-12
+version: "1.0.0"
+license: MIT
+abstract: >-
+  Computer-assisted decision of the rotation-invariant case of Frankl's
+  union-closed sets conjecture. No rotation-invariant counterexample exists on
+  13 or 14 points: both cases are decided by two independent exact methods and
+  carry DRAT certificates verified with drat-trim. The 15-point case is decided
+  by one exact method (CP-SAT, infeasible) and left honestly unconfirmed, with
+  a reproducible pipeline, measured resource costs, and a concrete plan for
+  completing it. The search itself was executed autonomously by an AI agent
+  loop (Claude) under human supervision.

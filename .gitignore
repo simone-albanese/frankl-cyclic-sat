@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# macOS noise
+.DS_Store
+
+# Solver toolchain: built from source (pinned commits), see docs/reproducing.md
+tools/
+
+# Large generated artifacts: CNF formulas (up to 492 MB) and DRAT proofs
+# (up to 12 GB). GitHub cannot host them; they are deterministic outputs of
+# the pipeline (dump_dimacs.py + CaDiCaL) and their sha256 hashes are recorded
+# in results/FOUND.sha256, results/Z15-PARTIAL.md and docs/results.md.
+# The small validation instances in results/dimacs/ (Z7, Z11) ARE tracked,
+# so anyone can verify a real certificate in seconds without rebuilding.
+results/*.cnf
+results/*.drat
+
+# Backup copies
+*.bak-*

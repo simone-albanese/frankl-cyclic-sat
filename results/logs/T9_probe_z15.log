@@ -1,0 +1,8 @@
+canon_table: 0.0s, RSS 0.08 GB
+n_orbite = 2190 (0.0s), RSS 0.08 GB
+periodi r_O = {3: 2, 5: 6, 15: 2182}
+sanity periodi in {1,3,5,15}: OK
+n_clausole = 28772876 (build 3.8s), RSS 1.61 GB
+CpModel costruito: 66.0s
+RSS_modello = 2.41 GB
+PROBE OK (nessun Solve eseguito)

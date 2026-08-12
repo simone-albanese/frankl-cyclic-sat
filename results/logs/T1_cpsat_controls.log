@@ -1,0 +1,5 @@
+  Z_7: 18 orbite non banali, 407 clausole di chiusura (build 0.0s)
+  CONTROLLO Z_7 (atteso INFEASIBLE): INFEASIBLE  [0.0s]
+  Z_11: 186 orbite non banali, 117373 clausole di chiusura (build 0.0s)
+  CONTROLLO Z_11 (atteso INFEASIBLE): INFEASIBLE  [0.8s]
+  [OK] pipeline SAT validata: nessun controesempio ciclico su Z_7, Z_11 (come da teoria)

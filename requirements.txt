@@ -1,0 +1,6 @@
+# Tested with Python 3.13.12 (in a venv) on macOS 15, Apple Silicon.
+# Exact versions used for all published runs:
+#   ortools    9.15.6755
+#   python-sat 1.9.dev13
+ortools==9.15.6755
+python-sat>=1.8

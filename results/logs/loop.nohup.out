@@ -1,0 +1,439 @@
+=== loop avviato 2026-08-11 22:41:11 · pid 28034 · max 200 iterazioni · pausa 8s/600s ===
+--- iterazione 1 · 2026-08-11 22:41:11 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione (99° giro) completata: il run CaDiCaL su Z15 è vivo e in salute — PID 3984, in esecuzione da 1h38m, RSS ~2,31 GB (ben sotto il cap di 9 GB), ~5,27 milioni di conflitti, DRAT a 1,2 GB in crescita regolare, watchdog attivo con kill previsto alle 09:03 di domani. Nessun verdetto ancora, quindi l'ho lasciato lavorare senza toccarlo.
+
+Ho registrato l'esito nel journal, riscritto `STATE/HANDOFF.md` (92° aggiornamento, prossimo task: stessa ri-verifica) e aggiornato `SITUAZIONE.md`/`situazione.html` (semaforo verde). Nessun evento importante, quindi nessuna notifica macOS. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 2 · 2026-08-11 22:52:24 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione (100° giro) completata. In sintesi:
+
+- **Task eseguito:** ri-verifica del run CaDiCaL su Z15 (T9b passo 2), come da handoff.
+- **Esito:** run vivo e sano — PID 3984, in esecuzione da 1h49m, RSS ~2,39 GB (ben sotto il cap di 9 GB), ~5,95M conflitti, DRAT cresciuto da 1,2 a 1,3 GB. Watchdog PID 23068 attivo (kill non prima delle 09:03 del 12/8). Nessun verdetto ancora: lasciato lavorare.
+- **Registrato:** journal aggiornato, `STATE/HANDOFF.md` riscritto (93° agg.), `SITUAZIONE.md` e `situazione.html` aggiornati (semaforo verde). Backlog e status invariati (`RUN`). Nessun evento importante, quindi nessuna notifica macOS.
+
+Il prossimo giro del driver ripartirà dalla stessa verifica, con i tre esiti possibili già istruiti nell'handoff (UNSAT → drat-trim; SAT → BLOCKED; kill → decomposizione, senza rilancio).
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 3 · 2026-08-11 23:03:38 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 101 completata. In sintesi:
+
+- **Task eseguito:** verifica del run CaDiCaL su Z15 (T9b passo 2), come indicato dall'handoff.
+- **Esito:** il solver è vivo e sano — PID 3984, in esecuzione da 2h01, RSS ~2,83 GB (ben sotto il cap di 9 GB), ~6,67 milioni di conflitti, DRAT cresciuto a 1,5 GB con andamento regolare. Watchdog attivo (kill previsto alle 09:03 del 12/8, cap 12h da override umano). Nessun verdetto ancora: lasciato lavorare.
+- **Registrato:** journal aggiornato, HANDOFF.md riscritto (94° agg.), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Nessun evento importante, quindi nessuna notifica macOS.
+
+Sessione chiusa: il prossimo giro del driver riverificherà l'esito del run.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 4 · 2026-08-11 23:16:06 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 102 completata: pura sorveglianza, nessun verdetto ancora.
+
+**Esito:** il run CaDiCaL su Z15 (PID 3984) è vivo e sano alle 23:16 — 2h13m di lavoro, RSS ~2,4 GB ben sotto il cap di 9 GB, ~7,45 milioni di conflitti, DRAT cresciuto regolarmente a 1,6 GB. Il watchdog (PID 23068, kill alle 09:03 di domani) è attivo. L'ho lasciato lavorare.
+
+**Registrato:** journal aggiornato, HANDOFF riscritto (95° agg., numeri aggiornati, istruzioni per il prossimo giro invariate), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Backlog e status.txt invariati (RUN, T9b in corso). Nessuna notifica macOS: nessun evento importante. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 5 · 2026-08-11 23:27:29 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione completata (103° giro, sorveglianza T9b). Esito: il run CaDiCaL su Z15 è vivo e in salute — PID 3984, RSS ~2,9 GB sotto il cap di 9 GB, ~8,24 milioni di conflitti a t≈8660 s, DRAT cresciuto a 1,8 GB, watchdog attivo con kill previsto alle 09:03 di domani. Nessun verdetto ancora: lasciato lavorare come da handoff. Journal, HANDOFF.md, SITUAZIONE.md e situazione.html aggiornati; nessun evento importante, quindi nessuna notifica macOS. Sessione terminata.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 6 · 2026-08-11 23:38:35 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione (104° giro) completata: il run CaDiCaL su Z15 è vivo e in salute — PID 3984, 2h35m di lavoro, ~8,9 milioni di conflitti, RSS ~2,8 GB su cap 9, DRAT cresciuto a 1,9 GB (progresso regolare), watchdog attivo con kill previsto alle 09:03. Nessun verdetto ancora: l'ho lasciato lavorare. Journal aggiornato, HANDOFF riscritto (97° agg.), SITUAZIONE.md e situazione.html aggiornati (semaforo verde). Nessun evento importante, quindi nessuna notifica macOS. Sessione chiusa: il prossimo giro del driver ri-verificherà l'esito.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 7 · 2026-08-11 23:49:46 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 105 completata (verifica run in background, nessun task nuovo aperto).
+
+**Esito:** il run CaDiCaL su Z15 è vivo e in salute alle 23:49:58 — PID 3984, RSS ~2,8 GB (ben sotto il cap di 9 GB), etime 2:47:02, ~9,73 milioni di conflitti a t≈9958 s, DRAT cresciuto a 2,1 GB (da 1,9 GB delle 23:38). Il watchdog PID 23068 è attivo con kill previsto alle 09:03 del 12 agosto. Nessun verdetto ancora: lasciato lavorare.
+
+Registrato nel journal, HANDOFF riscritto (98° agg., invariato nella sostanza: il prossimo task resta la ri-verifica del run), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Nessuna notifica macOS (nessun evento importante). Sessione terminata.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 8 · 2026-08-12 00:00:56 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 106 completata: il run CaDiCaL su Z15 è vivo e in salute (PID 3984, ~3 ore di lavoro, RSS 3,1 GB sotto il cap di 9 GB, ~10,5M conflitti, DRAT cresciuto a 2,3 GB), il watchdog PID 23068 è attivo con kill previsto alle 09:03. Nessun verdetto ancora: l'ho lasciato lavorare.
+
+Aggiornati journal (voce 106° giro), HANDOFF.md (99° aggiornamento, stesso prossimo task: ri-verifica dell'esito), SITUAZIONE.md e situazione.html (semaforo verde). Backlog invariato. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 9 · 2026-08-12 00:12:09 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 107 completata (task: verifica del run CaDiCaL su Z15).
+
+**Esito:** il run è vivo e sano — PID 3984 attivo da 3h09m, RSS ~2,6 GB (ben sotto il cap di 9 GB), ~11,19 milioni di conflitti a t≈11318 s, DRAT cresciuto a 2,4 GB con andamento regolare. Watchdog PID 23068 attivo (KILL alle 09:03, override umano a 12 h). Nessun verdetto ancora: lasciato lavorare.
+
+Registrato nel journal, riscritti HANDOFF (100° agg.), SITUAZIONE.md e situazione.html (semaforo verde). Status resta RUN; nessuna notifica macOS (nessun evento importante). Prossimo giro: ri-verifica dell'esito del solver. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 10 · 2026-08-12 00:23:16 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione (108° giro) completata: il run CaDiCaL su Z15 è vivo e sano, nessun verdetto ancora.
+
+Verifica alle 00:23:26 — PID 3984 attivo da 3h20m, RSS ~2,9 GB (ben sotto il cap di 9 GB), ~11,89M conflitti a t≈11978 s, DRAT cresciuto a 2,5 GB con andamento regolare; watchdog PID 23068 attivo (KILL alle 09:03, override umano a 12 h — nessuna estensione autonoma consentita). Nessun evento importante, quindi nessuna notifica macOS.
+
+Aggiornati journal (voce 108° giro), HANDOFF (101° agg., stesso task esatto per il prossimo giro: ri-verifica dell'esito), SITUAZIONE.md e situazione.html (semaforo verde). Status resta RUN. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 11 · 2026-08-12 00:34:33 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 109 completata: sorveglianza del run CaDiCaL su Z15.
+
+**Esito:** il run è vivo e sano — PID 3984, in esecuzione da 3h32m, RSS ~2,5 GB (ben sotto il cap di 9 GB), ~12,6M conflitti a t≈12650 s, DRAT cresciuto a 2,7 GB (da 2,5 GB alle 00:23, crescita regolare). Watchdog PID 23068 attivo (KILL alle 09:03). Nessun verdetto ancora: lasciato lavorare.
+
+Aggiornati journal (voce 109), HANDOFF (102° agg., stesso prossimo task: ri-verifica al giro successivo), SITUAZIONE.md e situazione.html (semaforo verde). Status resta RUN, backlog invariato (T9b ancora `[~]`). Nessuna notifica macOS: nessun evento importante. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 12 · 2026-08-12 00:45:51 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione (110° giro) completata: il run CaDiCaL su Z15 è ancora vivo e in salute — PID 3984, in esecuzione da 3h43m, RAM ~2,8 GB (ben sotto il cap di 9 GB), ~13,37M conflitti, DRAT cresciuto a 2,9 GB con progressione regolare. Nessun verdetto ancora; watchdog PID 23068 attivo con kill alle 09:03. Nessun evento importante, quindi nessuna notifica macOS.
+
+Aggiornati journal, HANDOFF (103° agg., invariato il prossimo task: ri-verifica esito al giro seguente), SITUAZIONE.md e situazione.html (semaforo verde). Status resta RUN. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 13 · 2026-08-12 00:56:59 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 111 completata (monitor T9b): il run CaDiCaL su Z15 è **vivo e sano** — PID 3984, in esecuzione da 3h54m, RSS ~2,89 GB (ben sotto il cap di 9 GB), ~14,04 milioni di conflitti, DRAT cresciuto a 3,0 GB con ritmo regolare. Watchdog attivo (kill non prima delle 09:03). Nessun verdetto ancora: lasciato lavorare.
+
+Registrato nel journal, HANDOFF riscritto (prossimo task: stessa ri-verifica), SITUAZIONE.md e situazione.html aggiornati (semaforo verde). Backlog e status invariati (RUN). Nessun evento importante, quindi nessuna notifica. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 14 · 2026-08-12 01:08:07 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 112 completata: il run CaDiCaL su Z15 (PID 3984) è vivo e sano — RSS ~2,95 GB (cap 9 GB), ~14,9 milioni di conflitti a 4h05m di calcolo, DRAT cresciuto regolarmente da 3,0 a 3,2 GB, watchdog attivo con kill previsto alle 09:03. Nessun verdetto ancora: lasciato lavorare senza toccare nulla.
+
+Registrato nel journal, HANDOFF riscritto (105° agg.), SITUAZIONE.md e situazione.html aggiornati (semaforo 🟢). Nessun evento importante, quindi nessuna notifica macOS. Prossimo task invariato: ri-verificare l'esito del run al prossimo giro. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 15 · 2026-08-12 01:19:04 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 113 completata: sorveglianza del run CaDiCaL su Z15 (T9b, passo 2).
+
+**Esito:** il solver è vivo e in salute — PID 3984, 4h16m di lavoro, RSS ~2,13 GB (ben sotto il cap di 9 GB), ~15,58M conflitti, DRAT a 3,3 GB in crescita regolare rispetto ai 3,2 GB del giro precedente. Il watchdog (PID 23068, kill alle 09:03 come da override umano a 12 h) è attivo. Nessun verdetto ancora: lasciato lavorare.
+
+**Registrato:** journal aggiornato, HANDOFF riscritto con le cifre correnti (istruzioni per il prossimo giro invariate), SITUAZIONE.md e situazione.html aggiornati (semaforo verde, nessuna richiesta all'umano). Backlog invariato — il task in cima resta la ri-verifica del run. Nessun evento importante, quindi nessuna notifica macOS. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 16 · 2026-08-12 01:30:13 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione completata (114° giro, sorveglianza).
+
+**Esito:** il run CaDiCaL su Z15 è vivo e in salute — PID 3984, in esecuzione da 4h27m, RSS ~2,18 GB (ben sotto il cap di 9 GB), ~16,44M conflitti a t≈15972 s, DRAT cresciuto a 3,4 GB (da 3,3 GB alle 01:19). Watchdog PID 23068 attivo con cap a 641 min (KILL alle 09:03). Nessun verdetto nel log: lasciato lavorare, come previsto dall'handoff.
+
+Registrato nel journal, riscritto `STATE/HANDOFF.md` (stesso prossimo task: ri-verifica al giro successivo), aggiornati `SITUAZIONE.md` e `situazione.html` (semaforo verde). Nessuna notifica macOS: nessun evento importante. Sessione terminata.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 17 · 2026-08-12 01:41:16 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 115 completata: il run CaDiCaL su Z15 è vivo e sano (PID 3984, 4h38m di calcolo, ~17,2 milioni di conflitti, RSS ~2,9 GB sotto il cap di 9 GB, DRAT cresciuto a 3,6 GB, watchdog attivo con kill previsto alle 09:03). Nessun verdetto ancora — l'ho lasciato lavorare. Journal aggiornato, HANDOFF riscritto (108° agg.), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Status resta RUN; il prossimo giro riverifica l'esito con la checklist già pronta nell'handoff. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 18 · 2026-08-12 01:52:22 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione completata (116° giro, sorveglianza run).
+
+**Esito:** il run CaDiCaL su Z15 è vivo e sano alle 01:52 — PID 3984, RSS ~2,90 GB (ben sotto il cap di 9 GB), in esecuzione da 4h49m, ~17,92 milioni di conflitti, file DRAT a 3,8 GB in crescita regolare (era 3,6 GB alle 01:41). Il watchdog (PID 23068, kill alle 09:03) è attivo. Nessun verdetto ancora: lasciato lavorare, come previsto dall'handoff.
+
+**Registrato:** journal aggiornato, HANDOFF riscritto (109° agg., stessi numeri aggiornati), SITUAZIONE.md e situazione.html rinfrescati (semaforo verde). Nessun evento importante, quindi nessuna notifica macOS. Status resta `RUN`; il prossimo giro ripete la verifica dell'esito.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 19 · 2026-08-12 02:03:32 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 117 completata: il run CaDiCaL su Z15 è vivo e sano (PID 3984, 5h00m di calcolo, RSS ~2,52 GB su cap 9 GB, ~18,6M conflitti, DRAT cresciuto a 3,9 GB), il watchdog PID 23068 è attivo con kill previsto alle 09:03. Nessun verdetto ancora: l'ho lasciato lavorare, come previsto dall'handoff.
+
+Aggiornati journal (append), HANDOFF.md (riscritto, 110° agg.), SITUAZIONE.md e situazione.html (semaforo verde). Status resta RUN; nessun evento importante, quindi nessuna notifica macOS. Il prossimo giro rifà la stessa verifica dell'esito.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 20 · 2026-08-12 02:14:43 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 118 completata: il run CaDiCaL su Z15 è vivo e in buona salute (PID 3984, RSS ~2,59 GB su cap 9 GB, ~19,39M conflitti, DRAT cresciuto da 3,9 a 4,1 GB), il watchdog è attivo con kill previsto alle 09:03. Nessun verdetto ancora, quindi l'ho lasciato lavorare senza toccare nulla. Journal aggiornato, HANDOFF riscritto (111° aggiornamento, invariato nella sostanza: il prossimo giro riesegue la stessa checklist di verifica), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Nessun evento importante, quindi nessuna notifica macOS. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 21 · 2026-08-12 02:25:49 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 119 completata: il run CaDiCaL su Z15 è ancora vivo e in salute, nessun verdetto.
+
+- **Verifica run** (task in cima al backlog): PID 3984 attivo alle 02:26, RSS ~2,58 GB (ben sotto il cap di 9 GB), etime 5:23:08, ~20,3M conflitti a t≈19315 s. Il file DRAT è a 4,2 GB e cresce regolarmente (era 4,1 GB alle 02:15). Watchdog PID 23068 attivo (cap 641 min, kill alle 09:03). Nessuna riga `s SATISFIABLE`/`s UNSATISFIABLE` nel log — solo statistiche di solve.
+- **Azione**: lasciato lavorare, come previsto dall'handoff. Nessun nuovo task aperto.
+- **Registrato**: journal aggiornato (119° giro), HANDOFF riscritto con i dati freschi (prossimo task invariato: ri-verifica esito), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Nessun evento importante, quindi nessuna notifica macOS.
+
+Sessione conclusa; il prossimo giro del driver ripete la verifica dell'esito.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 22 · 2026-08-12 02:37:02 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 120 completata: il run CaDiCaL su Z15 è ancora vivo e in salute.
+
+**Esito verificato alle 02:37:**
+- PID 3984 attivo, etime 5:34:22, RSS ~2,87 GB (ben sotto il cap di 9 GB)
+- ~21,2 milioni di conflitti a t≈19991 s; nessun verdetto ancora nel log
+- DRAT a 4,4 GB, crescita regolare (era 4,2 GB alle 02:26)
+- Watchdog PID 23068 attivo (cap 641 min, KILL previsto alle 09:03)
+
+Nessuna azione necessaria: il run va lasciato lavorare. Ho aggiornato journal (120° giro), HANDOFF (113° agg., stesso prossimo task: ri-verifica esito), SITUAZIONE.md e situazione.html (semaforo verde). Nessuna notifica macOS: nessun evento importante. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 23 · 2026-08-12 02:48:20 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 121 completata (sorveglianza T9b, nessun evento importante — niente notifica macOS).
+
+**Esito:** il run CaDiCaL su Z15 è vivo e in salute alle 02:48 — PID 3984, RSS ~2,57 GB (ben sotto il cap di 9 GB), quasi 6 ore di calcolo, ~22,1 milioni di conflitti, DRAT cresciuto regolarmente a 4,6 GB (era 4,4 GB alle 02:37). Il watchdog (PID 23068, kill alle 09:03) è verificato attivo. Nessun verdetto ancora: l'ho lasciato lavorare.
+
+Aggiornati journal, HANDOFF (114° agg.), SITUAZIONE.md e situazione.html. Status resta RUN; il prossimo giro ri-verifica l'esito con i comandi già pronti nell'handoff. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 24 · 2026-08-12 02:59:37 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 122 completata: il run CaDiCaL su Z15 è ancora vivo e sano — PID 3984 a quasi 6 ore di lavoro, RSS ~2,65 GB (ben sotto il cap di 9 GB), ~23,0 milioni di conflitti, DRAT cresciuto a 4,7 GB con progressione regolare, watchdog attivo con kill previsto alle 09:03. Nessun verdetto ancora nel log.
+
+Ho lasciato lavorare il solver senza toccarlo, aggiornato journal (122° giro), HANDOFF (115° agg.), SITUAZIONE.md e situazione.html (semaforo verde). Nessuna notifica macOS: nessun evento importante. Il prossimo giro ripete la ri-verifica con i comandi già pronti nell'handoff. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 25 · 2026-08-12 03:10:32 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 123 completata (T9b, verifica run CaDiCaL Z15).
+
+**Esito:** il run CaDiCaL è vivo e in salute alle 03:10 — PID 3984, ~6h08m di calcolo, RSS ~2,79 GB (ben sotto il cap di 9 GB), ~23,9M conflitti, file DRAT cresciuto da 4,7 a 5,0 GB. Watchdog attivo (kill previsto non prima delle 09:03). Nessun verdetto ancora: lasciato lavorare, come previsto dall'handoff.
+
+**Registrato:** journal aggiornato (123° giro), HANDOFF.md riscritto con i numeri freschi (il prossimo task resta la ri-verifica del run), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Status: RUN, backlog invariato. Nessuna notifica macOS (nessun evento importante). Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 26 · 2026-08-12 03:21:44 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione (124° giro) completata: il run CaDiCaL su Z15 è vivo e in salute — PID 3984, RSS ~2,78 GB (ben sotto il cap di 9 GB), 6h19m di lavoro, ~24,7 milioni di conflitti, DRAT a 5,1 GB in crescita regolare, watchdog attivo con kill previsto alle 09:03. Nessun verdetto ancora: l'ho lasciato lavorare.
+
+Aggiornati journal, HANDOFF (117° agg.), SITUAZIONE.md e situazione.html (semaforo verde). Nessun evento importante, quindi nessuna notifica macOS. Status resta RUN; il prossimo giro ri-verifica l'esito del solver. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 27 · 2026-08-12 03:33:07 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 125 completata (monitor T9b).
+
+**Esito:** il run CaDiCaL su Z15 è vivo e sano alle 03:33 — PID 3984, RSS ~2,89 GB (cap 9 GB ok), 6h30m di calcolo, ~25,55M conflitti, DRAT a 5,3 GB in crescita regolare. Watchdog PID 23068 attivo (KILL alle 09:03). Nessun verdetto ancora: lasciato lavorare.
+
+Aggiornati journal (append), HANDOFF (118° agg.), SITUAZIONE.md e situazione.html (semaforo 🟢). Nessun evento importante, quindi nessuna notifica macOS. Prossimo giro: stessa ri-verifica dell'esito del run. Sessione terminata.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 28 · 2026-08-12 03:44:16 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 126 completata e chiusa.
+
+**Esito:** il run CaDiCaL su Z15 (PID 3984) è vivo e in salute alle 03:44 — etime 6:41:30, RSS ~2,55 GB (ben sotto il cap di 9 GB), ~26,46M conflitti a t≈24043 s, DRAT cresciuto regolarmente a 5,4 GB. Il watchdog (PID 23068, kill alle 09:03) è attivo. Nessun verdetto nel log: lasciato lavorare.
+
+**Registrato:** voce nel journal, `STATE/HANDOFF.md` riscritto (120° agg. con dati aggiornati, prossimo task invariato: ri-verifica del run), `SITUAZIONE.md` e `situazione.html` aggiornati (semaforo verde). Backlog e status invariati (`RUN`). Nessun evento importante, quindi nessuna notifica macOS. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 29 · 2026-08-12 03:55:27 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione (127° giro) completata: il run CaDiCaL su Z15 è ancora vivo e in salute, nessun verdetto — l'ho lasciato lavorare.
+
+Dettagli verificati alle 03:55:44:
+- **CaDiCaL** (PID 3984): attivo da 6h52m, RSS ~2,48 GB (ben sotto il cap di 9 GB), ~27,31 milioni di conflitti a t≈24647 s, DRAT a 5,6 GB in crescita regolare (era 5,4 GB alle 03:44).
+- **Watchdog** (PID 23068): attivo, cap 641 min, kill previsto alle 09:03 come da override umano a 12 h.
+
+Stato aggiornato su file: journal (voce 127° giro), HANDOFF.md riscritto al 120° aggiornamento (prossimo task invariato: ri-verifica al giro successivo), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Nessuna notifica macOS: nessun evento importante. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 30 · 2026-08-12 04:07:02 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 128 completata: il run CaDiCaL su Z15 è ancora vivo e in salute (PID 3984, 7h04m di lavoro, RSS ~2,48 GB ben sotto il cap di 9 GB, ~28,2M conflitti, DRAT cresciuto a 5,7 GB), nessun verdetto ancora. L'ho lasciato lavorare come da handoff; il watchdog (cap 12h, kill alle 09:03) è attivo. Journal aggiornato, HANDOFF riscritto (129° giro = stessa ri-verifica), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Nessun evento importante, quindi nessuna notifica. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 31 · 2026-08-12 04:18:13 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione (129° giro) completata e chiusa.
+
+**Esito:** il run CaDiCaL su Z15 (T9b passo 2) è ancora vivo e in salute alle 04:18 — PID 3984, RSS 2,42 GB su cap 9, 7h15m di calcolo, ~29,2 milioni di conflitti, DRAT cresciuto regolarmente a 5,9 GB. Il watchdog (PID 23068, KILL alle 09:03) è attivo. Nessun verdetto ancora: l'ho lasciato lavorare, come previsto dall'handoff.
+
+Aggiornati: journal (nuova voce), HANDOFF.md (riscritto, prossimo task = stessa ri-verifica), SITUAZIONE.md e situazione.html (semaforo verde). Backlog e status.txt (RUN) invariati; nessun evento importante, quindi nessuna notifica macOS. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 32 · 2026-08-12 04:29:26 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione (130° giro) completata: il run CaDiCaL su Z15 è ancora vivo e sano — PID 3984, ~7h27m di calcolo, RSS ~2,35 GB (ben sotto il cap di 9 GB), ~30,1 milioni di conflitti, DRAT cresciuto a 6,1 GB. Il watchdog (PID 23068, kill alle 09:03) è attivo. Nessun verdetto ancora: l'ho lasciato lavorare.
+
+Aggiornati journal, HANDOFF (123° agg.), SITUAZIONE.md e situazione.html. Nessun evento importante, quindi niente notifica macOS. Status resta RUN; il prossimo giro riverifica l'esito. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 33 · 2026-08-12 04:40:41 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 131 completata. In sintesi:
+
+- **Task eseguito:** verifica del run CaDiCaL su Z15 (T9b passo 2), come da handoff.
+- **Esito:** il run è vivo e in salute — PID 3984, quasi 8 ore di calcolo, RAM 2,86 GB (cap 9 GB), ~31,2 milioni di conflitti, file DRAT cresciuto a 6,3 GB con progressione regolare. Il watchdog (PID 23068, kill alle 09:03) è attivo. Nessun verdetto ancora: lasciato lavorare.
+- **Registrato:** journal aggiornato, HANDOFF riscritto (con la nota invariata sul cap a 12 h non estendibile in autonomia), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Nessuna notifica macOS (nessun evento importante). Status resta RUN.
+
+Sessione terminata; il prossimo giro del driver ri-verifica l'esito con lo stesso protocollo.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 34 · 2026-08-12 04:51:54 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 132 completata (monitoraggio T9b).
+
+**Esito:** il run CaDiCaL su Z15 è ancora vivo e in salute alle 04:52 — PID 3984, RSS ~2,84 GB (ben sotto il cap di 9 GB), quasi 8 ore di esecuzione, ~32,1 milioni di conflitti, DRAT cresciuto a 6,5 GB con progressione regolare. Il watchdog (PID 23068, kill alle 09:03) è attivo. Nessun verdetto ancora: lasciato lavorare, come previsto dall'handoff.
+
+Aggiornati journal (voce 132° giro), HANDOFF.md (numeri freschi, prossimo task invariato: ri-verifica al prossimo giro), SITUAZIONE.md e situazione.html (semaforo verde). Status resta RUN. Nessuna notifica: nessun evento importante. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 35 · 2026-08-12 05:03:04 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 133 completata (monitoraggio T9b).
+
+**Esito:** il run CaDiCaL su Z15 è vivo e in salute — PID 3984, 8h01m di calcolo, RSS ~2,23 GB (ben sotto il cap di 9 GB), ~33,5 milioni di conflitti, DRAT cresciuto a 6,8 GB (da 6,5 GB del giro precedente). Il watchdog PID 23068 è attivo, con kill previsto alle 09:03 (override umano a 12 h totali, non estendibile in autonomia). Nessun verdetto ancora: lasciato lavorare.
+
+**Registrato:** journal aggiornato, HANDOFF riscritto (126° agg., stesso task in cima: ri-verifica al prossimo giro), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Nessun evento importante, quindi nessuna notifica macOS. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 36 · 2026-08-12 05:16:43 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 134 completata: il run CaDiCaL su Z15 è vivo e in salute (PID 3984, 8h14m di calcolo, ~34,45 milioni di conflitti, RAM 2,44 GB su cap di 9, DRAT cresciuto a 7,0 GB), nessun verdetto ancora. Il watchdog è attivo con kill previsto alle 09:03. L'ho lasciato lavorare; journal aggiornato, handoff riscritto, monitor umano aggiornato (semaforo verde). Nessuna azione richiesta all'umano. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 37 · 2026-08-12 05:28:00 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione completata (135° giro). In sintesi:
+
+- **Task eseguito**: ri-verifica del run CaDiCaL su Z15 (T9b passo 2), come indicato dall'handoff.
+- **Esito**: il solver è **ancora vivo e in salute** — PID 3984, RSS ~2,09 GB (ben sotto il cap di 9 GB), 8 h 27 m di lavoro, ~36,07 milioni di conflitti, DRAT a 7,2 GB in crescita regolare. Nessun verdetto nel log. Watchdog PID 23068 attivo, KILL previsto alle 09:03 (override umano a 12 h, da non estendere in autonomia).
+- **Registrato**: journal aggiornato, `HANDOFF.md` riscritto (128° agg., stesso prossimo task: ri-verifica al giro successivo), `SITUAZIONE.md` e `situazione.html` aggiornati con semaforo 🟢. Nessuna notifica macOS: nessun evento importante. `status.txt` resta `RUN`.
+
+Sessione chiusa; il prossimo giro del driver ricontrollerà l'esito del run.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 38 · 2026-08-12 05:40:53 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione completata (136° giro). Esito: il run CaDiCaL su Z15 è **ancora vivo e sano** — PID 3984, 8h38m di calcolo, RSS 2,15 GB (cap 9 GB ok), ~36,86M conflitti, DRAT cresciuto a 7,4 GB, watchdog attivo con KILL alle 09:03. Nessun verdetto ancora, quindi l'ho lasciato lavorare come previsto dall'handoff.
+
+Aggiornati: journal (nota del giro), `STATE/HANDOFF.md` (riscritto, finestra residua ~3h20m annotata), `STATE/SITUAZIONE.md` e `situazione.html` (semaforo verde). Nessuna notifica macOS: nessun evento importante. Il prossimo giro del driver ri-verificherà l'esito. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 39 · 2026-08-12 05:52:02 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 137 completata. Il run CaDiCaL su Z15 è vivo e in salute (PID 3984, quasi 9 ore di calcolo, RSS 2,27 GB ben sotto il cap di 9 GB, ~38M conflitti, DRAT cresciuto a 7,6 GB con andamento regolare, watchdog attivo con kill previsto alle 09:03): nessun verdetto ancora, quindi l'ho lasciato lavorare senza toccarlo. Ho aggiornato journal, HANDOFF (130° agg., invariato nel piano: al prossimo giro si riverifica l'esito) e il monitor SITUAZIONE.md/situazione.html (semaforo verde). Status resta RUN, backlog invariato. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 40 · 2026-08-12 06:03:12 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 138 conclusa: il run CaDiCaL su Z15 è ancora vivo e in salute (PID 3984, 9h00m di lavoro, ~39,07M conflitti, RSS 2,27 GB su cap 9 GB, DRAT cresciuto da 7,6 a 7,8 GB — crescita regolare), watchdog attivo con kill previsto alle 09:03. Nessun verdetto ancora, quindi l'ho lasciato lavorare senza toccare nulla.
+
+Aggiornati journal, HANDOFF (finestra residua ~3h, istruzioni invariate per i quattro esiti possibili), SITUAZIONE.md e situazione.html (semaforo verde). Nessun evento importante, quindi nessuna notifica macOS. Backlog invariato: T9b resta `[~]`. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 41 · 2026-08-12 06:14:39 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 139 chiusa. Il run CaDiCaL su Z15 è ancora vivo e sano: alle 06:14 il processo (PID 3984) era a 9h12m di lavoro con ~40,37M conflitti, RSS ~2,42 GB ben sotto il cap di 9 GB, e il file di prova DRAT è cresciuto da 7,8 a 8,1 GB — segno di progresso regolare, nessun verdetto ancora. Il watchdog (PID 23068, kill alle 09:03 come da override umano a 12 h) è attivo.
+
+Nessuna azione presa oltre alla registrazione: journal aggiornato, HANDOFF riscritto (132° agg., finestra residua ~2h48m), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Backlog invariato: il prossimo giro ri-verifica lo stesso run. Sessione terminata.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 42 · 2026-08-12 06:25:47 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 140 completata. Esito in breve:
+
+- **Run CaDiCaL Z15 vivo e sano** alle 06:26: PID 3984, RSS ~2,19 GB (cap 9 GB ok), etime 9:23:03, ~41,38M conflitti, DRAT a 8,3 GB in crescita regolare. Watchdog 23068 attivo (KILL alle 09:03). Nessun verdetto ancora — lasciato lavorare.
+- Registrato nel journal, riscritto `STATE/HANDOFF.md` (prossimo task invariato: ri-verifica dell'esito, finestra residua ~2h37m), aggiornati `SITUAZIONE.md` e `situazione.html` (semaforo verde).
+- Nessun evento importante ⇒ nessuna notifica macOS. Backlog invariato (T9b resta `[~]`).
+
+Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 43 · 2026-08-12 06:36:57 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 141 completata. Esito: il run CaDiCaL su Z15 è ancora vivo e sano — PID 3984, ~9h34m di calcolo, RSS 2,67 GB (ben sotto il cap di 9 GB), ~42,4M conflitti, DRAT cresciuto a 8,4 GB con progressione regolare; nessun verdetto ancora. Il watchdog (PID 23068, KILL alle 09:03) è attivo. L'ho lasciato lavorare, come previsto dall'handoff.
+
+Registrato: journal aggiornato (141° giro), HANDOFF riscritto con i dati freschi e finestra residua ~2h26m, SITUAZIONE.md e situazione.html aggiornati (semaforo verde). Nessun evento importante, quindi nessuna notifica macOS. Status resta RUN; il prossimo giro rifà la stessa verifica.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 44 · 2026-08-12 06:48:04 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 142 completata: il run CaDiCaL su Z15 è vivo e regolare, nessun verdetto ancora.
+
+- **Verifica alle 06:48**: PID 3984 attivo (RSS ~2,63 GB su cap 9 GB, ~43,5 milioni di conflitti a t≈35.042 s), DRAT cresciuto a 8,6 GB (da 8,4 alle 06:37). Watchdog PID 23068 attivo, KILL alle 09:03 come da override umano a 12 h. Lasciato lavorare.
+- **Registrato**: journal aggiornato (142° giro), HANDOFF riscritto (135° agg., finestra residua ~2h15m), SITUAZIONE.md e situazione.html aggiornati (semaforo 🟢).
+- **Prossimo task**: stessa ri-verifica al giro successivo; se alle 09:03 il watchdog uccide il run senza verdetto, si passa alla decomposizione per sharding, non a una nuova estensione di tempo.
+
+Nessuna notifica macOS: nessun evento importante. Status resta RUN. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 45 · 2026-08-12 06:59:26 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 143 completata (task: verifica run in background).
+
+**Esito:** il run CaDiCaL su Z15 è ancora vivo e in salute alle 06:59 — PID 3984, quasi 10 ore di calcolo, RAM ~2,36 GB (ben sotto il cap di 9 GB), ~44,55 milioni di conflitti, DRAT a 8,8 GB in crescita regolare. Nessun verdetto ancora. Watchdog attivo con kill alle 09:03 (limite delle 12 ore autorizzato dall'umano, non estendibile in autonomia); restano ~2 ore di finestra.
+
+**Registrato:** journal aggiornato, HANDOFF riscritto (prossimo task: ri-verificare l'esito, con i tre rami già pronti — UNSAT → drat-trim, SAT → BLOCKED, timeout → sharding), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Nessun evento importante, quindi nessuna notifica macOS. Sessione conclusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 46 · 2026-08-12 07:10:50 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 144 completata: il run CaDiCaL su Z15 è vivo e in salute (PID 3984, 10h08m di lavoro, RSS ~2,12 GB ben sotto il cap, ~45,9M conflitti, DRAT cresciuto a 9,0 GB), il watchdog è attivo con KILL alle 09:03. Nessun verdetto ancora, quindi l'ho lasciato lavorare senza toccare nulla. Journal aggiornato, HANDOFF riscritto (finestra residua ~1h52m), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Nessun evento importante da notificare, backlog invariato. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 47 · 2026-08-12 07:22:04 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 145 completata. Esito in breve:
+
+- **CaDiCaL su Z15 è ancora vivo e in salute** alle 07:22: PID 3984, RSS 2,36 GB (cap 9 GB ok), 10h19m di calcolo, ~47,0 milioni di conflitti, DRAT cresciuto a 9,2 GB (era 9,0 GB alle 07:11). Nessun verdetto ancora nel log.
+- Watchdog PID 23068 attivo; il KILL da override umano (12 h totali) scatta alle 09:03 — finestra residua ~1h40m. Nessuna estensione autonoma, come da istruzioni.
+- Come previsto dall'handoff per il caso "ancora vivo": run lasciato lavorare, journal aggiornato, HANDOFF riscritto (138° agg.), SITUAZIONE.md e situazione.html aggiornati (semaforo verde). Nessun evento importante ⇒ nessuna notifica macOS.
+
+Prossimo task per il giro successivo: stessa ri-verifica del run; se entro le 09:03 non c'è verdetto, si passa alla decomposizione (sharding stile T8), senza rilanciare lo stesso comando. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 48 · 2026-08-12 07:33:12 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 146 completata: il run CaDiCaL su Z15 è ancora vivo e sano, nessun verdetto — lasciato lavorare.
+
+Verifica delle 07:33: PID 3984 attivo (etime 10:30:27, RSS ~2,16 GB, ben sotto il cap di 9 GB), ~48,2 milioni di conflitti, DRAT cresciuto a 9,4 GB (era 9,2 alle 07:22, quindi il solver sta progredendo). Watchdog PID 23068 attivo, kill previsto alle 09:03 (le 12 ore autorizzate dall'umano). Nessun output `s SATISFIABLE`/`s UNSATISFIABLE` nel log.
+
+Registrato tutto: journal aggiornato, HANDOFF riscritto (con avviso esplicito che il prossimo giro cadrà probabilmente a ridosso o dopo il kill delle 09:03, e che in quel caso NON si rilancia ma si passa allo sharding), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Nessuna notifica macOS (nessun evento importante). Status resta RUN. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 49 · 2026-08-12 07:44:29 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 147 completata: il run CaDiCaL su Z15 è ancora vivo e in buona salute, nessun verdetto ancora.
+
+Verifica delle 07:44: PID 3984 attivo da 10h42m, RAM ~2,17 GB (ben sotto il cap di 9 GB), ~49,1 milioni di conflitti, DRAT cresciuto a 9,6 GB (era 9,4 alle 07:33) — il solver sta lavorando regolarmente. Il watchdog (PID 23068, kill alle 09:03) è attivo. Come da handoff, l'ho lasciato lavorare senza toccare nulla.
+
+Ho aggiornato journal, HANDOFF (con la finestra residua ~1h18m e il promemoria che il prossimo giro cadrà probabilmente a ridosso o dopo il kill delle 09:03, con il ramo "killato" da seguire in quel caso: sharding, nessun rilancio), SITUAZIONE.md e situazione.html. Status resta RUN, backlog invariato. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 50 · 2026-08-12 07:55:44 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 148 completata. Esito: il run CaDiCaL su Z15 è ancora vivo e sano (PID 3984, 10h53m di lavoro, RSS ~2,6 GB sotto il cap di 9 GB, ~50,8M conflitti, DRAT cresciuto a 9,9 GB), nessun verdetto ancora. Il watchdog (PID 23068) è attivo con kill fissato alle 09:03 — restano ~1h07m di finestra. L'ho lasciato lavorare come previsto dal ramo "ancora vivo" dell'handoff.
+
+Registrazioni fatte: journal aggiornato (148° giro), HANDOFF.md riscritto con i dati freschi e le istruzioni invariate per i tre esiti possibili al prossimo giro (UNSAT → drat-trim; SAT → BLOCKED perché contraddirebbe T9a; killato → sharding, senza rilanci), SITUAZIONE.md e situazione.html aggiornati con semaforo verde. Status resta RUN, backlog invariato. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 51 · 2026-08-12 08:07:32 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 149 completata. Il run CaDiCaL su Z15 è ancora vivo e in buona salute: PID 3984, 11h05m di calcolo, RAM ~2,3 GB (ben sotto il cap di 9 GB), ~51,8 milioni di conflitti, DRAT a 10 GB in crescita regolare. Il watchdog (PID 23068) è attivo con kill fissato alle 09:03 — restano ~55 minuti e nessun verdetto ancora nel log, quindi l'ho lasciato lavorare senza toccare nulla.
+
+Ho aggiornato journal, HANDOFF (con il ramo "killato" in evidenza, dato che il prossimo giro cadrà quasi certamente dopo le 09:03: in quel caso si passa allo sharding, senza rilanci), SITUAZIONE.md e situazione.html. Semaforo verde, nessuna notifica necessaria, status resta RUN. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 52 · 2026-08-12 08:19:25 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 150 completata: il run CaDiCaL su Z15 è ancora vivo e in salute (11h17m, RSS ~2,1 GB sotto il cap di 9 GB, ~52,95M conflitti, DRAT a 10 GB in crescita regolare, nessun verdetto). Il watchdog è attivo con kill alle 09:03 (limite umano di 12 ore, non estendibile in autonomia). L'ho lasciato lavorare.
+
+Ho registrato l'esito nel journal, riscritto `STATE/HANDOFF.md` (con il ramo "killato" ben evidenziato, dato che il prossimo giro cadrà quasi certamente dopo le 09:03: in quel caso niente rilancio, si passa allo sharding) e aggiornato `STATE/SITUAZIONE.md` e `situazione.html`. Nessun evento importante, quindi nessuna notifica macOS. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 53 · 2026-08-12 08:31:14 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 151 completata: il run CaDiCaL su Z15 è ancora vivo e sano alle 08:31 (11h28m di calcolo, RSS ~2,5 GB sotto il cap di 9 GB, ~54,1 milioni di conflitti, DRAT a 10 GB in crescita regolare), watchdog attivo con kill programmato alle 09:03. Nessun verdetto ancora: l'ho lasciato lavorare, come previsto dall'handoff.
+
+Aggiornati journal, HANDOFF (144° agg., invariato nella sostanza: il prossimo giro cadrà quasi certamente dopo il kill delle 09:03 e dovrà seguire il ramo "killato" — sharding, non rilancio), SITUAZIONE.md e situazione.html. Nessun evento importante da notificare, status resta RUN. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 54 · 2026-08-12 08:42:43 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 152 completata. In sintesi:
+
+- **CaDiCaL su Z15 ancora vivo** alle 08:42 (PID 3984, etime 11h40m, RSS 2,5 GB su cap 9, ~55,4M conflitti, DRAT a 11 GB in crescita). Nessun verdetto nel log. Watchdog PID 23068 confermato attivo, kill previsto alle 09:03.
+- Ramo "ancora vivo" dell'handoff: lasciato lavorare, nessun rilancio né estensione (le 12 h sono un override umano non estendibile in autonomia).
+- Registrato: journal aggiornato, `STATE/HANDOFF.md` riscritto (145° agg., dati freschi e istruzioni invariate per i tre esiti possibili al prossimo giro, incluso il ramo "killato" ⇒ sharding), `STATE/SITUAZIONE.md` e `situazione.html` aggiornati (semaforo verde). Nessun evento importante ⇒ nessuna notifica macOS.
+
+Il prossimo giro cadrà quasi certamente dopo il kill delle 09:03 e dovrà seguire il ramo "killato": niente rilancio, decomposizione per sharding. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 55 · 2026-08-12 08:54:11 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 153 completata. Il run CaDiCaL Z15 è ancora vivo alle 08:54 (PID 3984, 11h51m di lavoro, RSS ~2,5 GB entro il cap, ~56,6M conflitti, DRAT a 11 GB, nessun verdetto nel log); il watchdog PID 23068 è attivo e lo killerà alle 09:02:56 come da override umano di 12 ore, non estendibile oltre. L'ho lasciato lavorare per gli ultimi minuti disponibili.
+
+Ho registrato l'esito nel journal, riscritto `STATE/HANDOFF.md` (il prossimo giro troverà quasi certamente il run killato: il ramo da seguire è la progettazione dello sharding con effort `high`, senza rilanciare lo stesso comando) e aggiornato `SITUAZIONE.md`/`situazione.html` (semaforo verde). Nessun evento importante ⇒ nessuna notifica macOS. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 56 · 2026-08-12 09:05:39 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione (154° giro) completata: il run CaDiCaL su Z15 è **ancora vivo e in salute** — nessun verdetto, quindi l'ho lasciato lavorare come prescrive il ciclo operativo.
+
+Riscontri di questa sessione:
+- PID 3984 vivo alle 09:05 (RSS ~2,0 GB, etime 12:02:55, ~58,0M conflitti, DRAT a 11 GB); watchdog PID 91586 attivo (riavviato alle 08:58 con la terza estensione umana), zero occorrenze di `KILL` nel log. Scadenza invariata: 12:02:56.
+- Nessun nuovo task aperto: il primo task del backlog è proprio questo run in corso.
+
+Aggiornati `STATE/journal.md` (append), `STATE/HANDOFF.md` (147° agg., con ramo "ancora vivo" aggiunto al prossimo task), `STATE/SITUAZIONE.md` e `situazione.html` (semaforo verde). Nessuna notifica macOS: nessun evento importante. `status.txt` resta `RUN`.
+
+Sessione conclusa — il prossimo giro del driver troverà l'esito finale del run (verdetto o KILL TIMEOUT alle 12:03) e agirà secondo i rami già pronti nell'handoff.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 57 · 2026-08-12 09:17:02 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione (155° giro) completata: il run CaDiCaL su Z15 è ancora vivo e in salute, quindi l'ho lasciato lavorare.
+
+**Stato verificato alle 09:17:**
+- PID 3984 vivo: RSS ~2,6 GB, etime 12:14:21, ~58,9 milioni di conflitti a t≈43973 s, DRAT a 11 GB — nessun verdetto nel log.
+- Watchdog PID 91586 attivo (confermato con `ps`), kill programmato alle 12:02:56 (terza estensione, non estendibile oltre).
+
+**Registrato:** voce nel journal, HANDOFF aggiornato (148° agg., stesso prossimo task: verificare l'esito finale del run), SITUAZIONE.md e situazione.html riscritti con semaforo 🟢. Nessun evento importante, quindi nessuna notifica macOS. Status resta `RUN`.
+
+Il prossimo giro deve rieseguire i comandi di verifica dell'handoff: se il run è finito con `s UNSATISFIABLE` si passa a drat-trim; se killato dal watchdog si passa alla progettazione dello sharding (effort `high`). Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 58 · 2026-08-12 09:28:10 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione (156° giro) completata: il run CaDiCaL su Z15 è ancora vivo e in salute — PID 3984, ~12,5 ore di lavoro, RSS ~1,9 GB, ~60,2 milioni di conflitti, DRAT a 11 GB, watchdog attivo con kill previsto alle 12:02:56, disco con 314 GB liberi. Nessun verdetto ancora, quindi l'ho lasciato lavorare come previsto dall'handoff.
+
+Registrato tutto: journal aggiornato, HANDOFF.md riscritto (il prossimo task resta la verifica dell'esito finale, con i tre rami già pronti: UNSAT → drat-trim, SAT → BLOCKED, KILL → progettare sharding), SITUAZIONE.md e situazione.html aggiornati (semaforo verde). Backlog e status.txt invariati (RUN). Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 59 · 2026-08-12 09:39:55 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione (157° giro) completata: il run CaDiCaL su Z15 è vivo e regolare — PID 3984, ~61,1 milioni di conflitti dopo 12h37m, RSS ~1,5 GB, DRAT a 12 GB, 315 GB di disco liberi. Il watchdog (PID 91586, verificato attivo) lo fermerà alle 12:02:56 se non conclude prima. Nessun verdetto ancora, quindi l'ho lasciato lavorare senza toccare nulla.
+
+Aggiornati journal (nuova voce), HANDOFF (150° agg., dati freschi, stesso prossimo task: verificare l'esito del run) e i due file di monitor SITUAZIONE.md/situazione.html (semaforo verde). Backlog e status.txt invariati (RUN). Nessun evento importante, quindi nessuna notifica macOS. Sessione chiusa.
+    (job sotto watchdog: prossimo controllo fra 600s)
+--- iterazione 60 · 2026-08-12 09:51:25 · effort medium ---
+Ignoring 14 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/Users/simonealbanese/Documents/Matematics/frankl"].hasTrustDialogAccepted: true in /Users/simonealbanese/.claude.json.
+Iterazione 158 completata: il run CaDiCaL su Z15 è ancora vivo e in salute — PID 3984, RSS ~1,5 GB, ~62,1 milioni di conflitti dopo quasi 13 ore, DRAT a 12 GB, disco con 315 GB liberi, watchdog attivo con kill programmato alle 12:02:56. Nessun verdetto ancora, quindi l'ho lasciato lavorare senza toccare nulla.
+
+Ho registrato l'esito nel journal, riscritto `STATE/HANDOFF.md` (158° giro, stesse istruzioni per il giro decisivo: dopo le ~12:03 l'esito sarà UNSAT → drat-trim, SAT → BLOCKED, o KILL → sharding T10 con effort alto) e aggiornato `STATE/SITUAZIONE.md` e `situazione.html` (semaforo verde). Status resta RUN. Fine sessione.
+    (job sotto watchdog: prossimo controllo fra 600s)

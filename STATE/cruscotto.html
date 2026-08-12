@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frankl — Cruscotto di controllo</title>
+<style>
+  /* ---------- token system: light (bare :root) ---------- */
+  :root {
+    --ground:      #E9ECF1;
+    --panel:       #FFFFFF;
+    --inset:       #F3F5F9;
+    --ink:         #101720;
+    --ink-2:       #4A5464;
+    --ink-3:       #737F91;
+    --rule:        #C8D0DB;
+    --rule-soft:   #DDE3EB;
+    --accent:      #1B4F8C;
+    --accent-ink:  #FFFFFF;
+    --accent-soft: #DCE6F4;
+    --ok:          #1B6B45;
+    --ok-soft:     #D8EDE2;
+    --warn:        #8A5A06;
+    --warn-soft:   #F6E9CE;
+    --crit:        #A32218;
+    --crit-soft:   #F6DEDB;
+    --grid:        rgba(27, 79, 140, .055);
+    --shadow:      0 1px 2px rgba(16, 23, 32, .06), 0 8px 24px -16px rgba(16, 23, 32, .28);
+
+    --serif: ui-serif, "New York", Georgia, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:      #0C121A;
+      --panel:       #131B26;
+      --inset:       #0F1721;
+      --ink:         #E6EBF2;
+      --ink-2:       #9DAABC;
+      --ink-3:       #778496;
+      --rule:        #273444;
+      --rule-soft:   #1D2733;
+      --accent:      #6FA8E8;
+      --accent-ink:  #08111C;
+      --accent-soft: #17293F;
+      --ok:          #57C48D;
+      --ok-soft:     #12291F;
+      --warn:        #E0A94A;
+      --warn-soft:   #2A2113;
+      --crit:        #F07E74;
+      --crit-soft:   #2E1815;
+      --grid:        rgba(111, 168, 232, .05);
+      --shadow:      0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px -18px rgba(0, 0, 0, .9);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:      #0C121A;
+    --panel:       #131B26;
+    --inset:       #0F1721;
+    --ink:         #E6EBF2;
+    --ink-2:       #9DAABC;
+    --ink-3:       #778496;
+    --rule:        #273444;
+    --rule-soft:   #1D2733;
+    --accent:      #6FA8E8;
+    --accent-ink:  #08111C;
+    --accent-soft: #17293F;
+    --ok:          #57C48D;
+    --ok-soft:     #12291F;
+    --warn:        #E0A94A;
+    --warn-soft:   #2A2113;
+    --crit:        #F07E74;
+    --crit-soft:   #2E1815;
+    --grid:        rgba(111, 168, 232, .05);
+    --shadow:      0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px -18px rgba(0, 0, 0, .9);
+  }
+
+  /* ---------- base ---------- */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background-color: var(--ground);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 26px 26px;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .shell { max-width: 74rem; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 600; text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+  .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  /* ---------- header ---------- */
+  .masthead { display: flex; gap: 1.25rem; align-items: flex-start; padding-bottom: 1.5rem; border-bottom: 1px solid var(--rule); }
+  .mark { flex: 0 0 auto; }
+  .mark circle { fill: none; stroke: var(--rule); stroke-width: 1.2; }
+  .mark .node { fill: var(--panel); stroke: var(--ink-3); stroke-width: 1.1; }
+  .mark .node.on { fill: var(--accent); stroke: var(--accent); }
+  .masthead h1 { font-size: clamp(1.75rem, 3.4vw, 2.35rem); letter-spacing: -.015em; line-height: 1.15; }
+  .masthead .lede { color: var(--ink-2); font-size: .98rem; margin-top: .3rem; max-width: 46ch; }
+  .stamp {
+    margin-left: auto; flex: 0 0 auto; text-align: right; font-family: var(--mono);
+    font-size: .72rem; line-height: 1.5; color: var(--ink-3); letter-spacing: .02em;
+  }
+  .stamp b { display: block; color: var(--ink-2); font-weight: 600; }
+
+  /* ---------- snapshot notice ---------- */
+  .notice {
+    display: flex; gap: .85rem; align-items: flex-start;
+    margin: 1.5rem 0 0; padding: .9rem 1.1rem;
+    background: var(--warn-soft); border-left: 3px solid var(--warn);
+    border-radius: 0 6px 6px 0; font-size: .9rem; color: var(--ink);
+  }
+  .notice .k { font-family: var(--mono); font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; color: var(--warn); font-weight: 700; padding-top: .18rem; white-space: nowrap; }
+
+  /* ---------- status band ---------- */
+  .band { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin: 1.75rem 0 0; background: var(--rule); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+  .tile { background: var(--panel); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .3rem; position: relative; }
+  .tile::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--stripe, transparent); }
+  .tile .label { font-family: var(--mono); font-size: .67rem; text-transform: uppercase; letter-spacing: .11em; color: var(--ink-3); }
+  .tile .value { font-family: var(--serif); font-size: 1.5rem; line-height: 1.15; font-variant-numeric: tabular-nums; }
+  .tile .value.sm { font-size: 1.1rem; }
+  .tile .foot { font-size: .8rem; color: var(--ink-2); }
+
+  /* ---------- layout ---------- */
+  .cols { display: grid; grid-template-columns: 1.05fr .95fr; gap: 1.5rem; margin-top: 1.5rem; align-items: start; }
+  .card { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; box-shadow: var(--shadow); }
+  .card + .card { margin-top: 1.5rem; }
+  .card > header { padding: 1rem 1.25rem .75rem; border-bottom: 1px solid var(--rule-soft); display: flex; align-items: baseline; gap: .6rem; }
+  .card > header h2 { font-size: 1.12rem; letter-spacing: -.01em; }
+  .card > header .hint { font-family: var(--mono); font-size: .7rem; color: var(--ink-3); margin-left: auto; letter-spacing: .04em; }
+  .card .body { padding: 1.1rem 1.25rem 1.25rem; display: flex; flex-direction: column; gap: 1.1rem; }
+
+  /* ---------- command rows ---------- */
+  .cmd { display: flex; flex-direction: column; gap: .4rem; }
+  .cmd .top { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; }
+  .cmd .name { font-weight: 600; font-size: .93rem; }
+  .cmd .note { font-size: .82rem; color: var(--ink-2); }
+  .cmd .shell-row { display: flex; align-items: stretch; gap: 0; border: 1px solid var(--rule); border-radius: 6px; background: var(--inset); overflow: hidden; }
+  .cmd pre { margin: 0; padding: .6rem .75rem; font-family: var(--mono); font-size: .8rem; line-height: 1.65; color: var(--ink); overflow-x: auto; flex: 1 1 auto; white-space: pre; }
+  .cmd pre .p { color: var(--ink-3); }
+  .copy {
+    flex: 0 0 auto; border: 0; border-left: 1px solid var(--rule); background: var(--panel);
+    color: var(--ink-2); font-family: var(--mono); font-size: .68rem; letter-spacing: .08em;
+    text-transform: uppercase; padding: 0 .85rem; cursor: pointer; transition: background .15s, color .15s;
+  }
+  .copy:hover { background: var(--accent-soft); color: var(--accent); }
+  .copy[data-done="1"] { background: var(--ok-soft); color: var(--ok); }
+  .group-label { font-family: var(--mono); font-size: .67rem; text-transform: uppercase; letter-spacing: .11em; color: var(--ink-3); padding-bottom: .1rem; border-bottom: 1px solid var(--rule-soft); }
+
+  /* ---------- verdict ---------- */
+  .verdict { border: 1px solid var(--ok); background: var(--ok-soft); border-radius: 6px; padding: .9rem 1rem; display: flex; flex-direction: column; gap: .45rem; }
+  .verdict .head { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  .verdict .tag { font-family: var(--mono); font-size: .95rem; font-weight: 700; color: var(--ok); letter-spacing: .02em; }
+  .verdict .when { font-family: var(--mono); font-size: .72rem; color: var(--ink-2); margin-left: auto; }
+  .verdict p { font-size: .88rem; color: var(--ink); }
+  .verdict.wait { border-color: var(--warn); background: var(--warn-soft); }
+  .verdict.wait .tag { color: var(--warn); }
+  .verdict.flat { border-color: var(--rule); background: var(--inset); }
+  .verdict.flat .tag { color: var(--ink); }
+  .verdict.flat p { color: var(--ink-2); }
+  .logblock { margin: 0; padding: .7rem .85rem; background: var(--inset); border: 1px solid var(--rule); border-radius: 6px; font-family: var(--mono); font-size: .76rem; line-height: 1.7; overflow-x: auto; color: var(--ink-2); white-space: pre; }
+  .logblock b { color: var(--ink); font-weight: 600; }
+  .caption { font-size: .8rem; color: var(--ink-3); }
+
+  .facts { width: 100%; border-collapse: collapse; font-size: .86rem; }
+  .facts th, .facts td { text-align: left; padding: .42rem 0; border-bottom: 1px solid var(--rule-soft); vertical-align: baseline; }
+  .facts th { font-weight: 500; color: var(--ink-2); font-size: .82rem; }
+  .facts td { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+  .facts tr:last-child th, .facts tr:last-child td { border-bottom: 0; }
+  .facts td.ok { color: var(--ok); font-weight: 600; }
+  .facts thead th { font-family: var(--mono); font-size: .67rem; text-transform: uppercase; letter-spacing: .09em; color: var(--ink-3); border-bottom-color: var(--rule); }
+  .facts thead th + th { text-align: right; }
+
+  /* ---------- gauge: avanzamento del run Z15 ---------- */
+  .gauge { display: flex; flex-direction: column; gap: 1.15rem; }
+  .g { display: flex; flex-direction: column; gap: .38rem; }
+  .g-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .g-head .n { font-family: var(--mono); font-size: .66rem; text-transform: uppercase; letter-spacing: .11em; color: var(--ink-3); }
+  .g-head .v { font-family: var(--mono); font-size: .78rem; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .g-head .v em { font-style: normal; color: var(--ink-3); }
+
+  .bar { position: relative; height: .8rem; background: var(--inset); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .bar .fill { position: absolute; inset: 0 auto 0 0; background: var(--warn); width: 0; transition: width .6s linear, background .3s; }
+  .bar .fill.done { background: var(--crit); }
+  .bar .tick { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--rule); }
+  .bar .band {
+    position: absolute; top: 0; bottom: 0;
+    background: repeating-linear-gradient(135deg, var(--crit-soft) 0 5px, transparent 5px 10px);
+    border-left: 1px solid var(--crit); border-right: 1px solid var(--crit);
+  }
+  .bar .capline { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--crit); }
+  .bar.sm { height: .5rem; }
+
+  .axis { position: relative; height: 1rem; font-family: var(--mono); font-size: .63rem; color: var(--ink-3); letter-spacing: .03em; }
+  .axis span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+  .axis span.l { transform: none; left: 0; }
+  .axis span.r { transform: none; right: 0; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: .3rem 1.1rem; font-family: var(--mono); font-size: .64rem; color: var(--ink-3); letter-spacing: .03em; }
+  .legend b { display: inline-flex; align-items: center; gap: .35rem; font-weight: 400; }
+  .legend i { width: .7rem; height: .55rem; border-radius: 2px; flex: 0 0 auto; }
+
+  .g-note { font-size: .8rem; color: var(--ink-2); }
+  .g-note.alarm { color: var(--crit); }
+
+  /* ---------- roadmap ---------- */
+  .track { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .track li { display: grid; grid-template-columns: 3.1rem 1fr auto; gap: .9rem; align-items: baseline; padding: .62rem 0; border-bottom: 1px solid var(--rule-soft); }
+  .track li:last-child { border-bottom: 0; }
+  .track .id { font-family: var(--mono); font-size: .78rem; color: var(--ink-3); letter-spacing: .03em; }
+  .track .what { font-size: .89rem; }
+  .track .what em { font-style: normal; color: var(--ink-2); }
+  .track li.done .id { color: var(--ok); font-weight: 700; }
+  .track li.done .what { color: var(--ink-2); }
+  .track li.obs .id, .track li.obs .what, .track li.obs .what em { color: var(--ink-3); }
+  .track li.run { background: var(--warn-soft); margin: 0 -1.25rem; padding-left: 1.25rem; padding-right: 1.25rem; border-radius: 4px; }
+  .track li.run .id { color: var(--warn); font-weight: 700; }
+  .track li.next { background: var(--accent-soft); margin: 0 -1.25rem; padding-left: 1.25rem; padding-right: 1.25rem; border-radius: 4px; }
+  .track li.next .id { color: var(--accent); font-weight: 700; }
+  .chip { font-family: var(--mono); font-size: .66rem; text-transform: uppercase; letter-spacing: .08em; padding: .16rem .5rem; border-radius: 999px; border: 1px solid var(--rule); color: var(--ink-3); white-space: nowrap; }
+  .chip.done { color: var(--ok); border-color: var(--ok); background: var(--ok-soft); }
+  .chip.next { color: var(--accent); border-color: var(--accent); background: var(--panel); }
+  .chip.run { color: var(--warn); border-color: var(--warn); background: var(--panel); }
+  .chip.hi { color: var(--warn); border-color: var(--warn); background: var(--warn-soft); }
+
+  /* ---------- signals ---------- */
+  .signals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+  .sig { background: var(--panel); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .35rem; }
+  .sig .dot { width: .7rem; height: .7rem; border-radius: 50%; }
+  .sig .t { font-weight: 600; font-size: .92rem; display: flex; align-items: center; gap: .5rem; }
+  .sig p { font-size: .85rem; color: var(--ink-2); }
+  .sig code { font-family: var(--mono); font-size: .78rem; background: var(--inset); border: 1px solid var(--rule-soft); border-radius: 4px; padding: .05rem .3rem; color: var(--ink); }
+
+  /* ---------- diagnostics ---------- */
+  .diag { display: flex; flex-direction: column; gap: .9rem; }
+  .diag .row { display: grid; grid-template-columns: 12rem 1fr; gap: 1rem; align-items: baseline; padding-bottom: .9rem; border-bottom: 1px solid var(--rule-soft); }
+  .diag .row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .diag .sym { font-family: var(--mono); font-size: .78rem; color: var(--ink); line-height: 1.55; }
+  .diag .fix { font-size: .87rem; color: var(--ink-2); }
+  .diag .fix strong { color: var(--ink); font-weight: 600; }
+
+  section.block { margin-top: 1.5rem; }
+  section.block > h2 { font-size: 1.12rem; margin-bottom: .2rem; }
+  section.block > .sub { color: var(--ink-2); font-size: .88rem; margin-bottom: .9rem; }
+
+  footer { margin-top: 2.5rem; padding-top: 1.1rem; border-top: 1px solid var(--rule); color: var(--ink-3); font-size: .8rem; display: flex; flex-wrap: wrap; gap: .4rem 1.5rem; }
+  footer .mono { color: var(--ink-2); }
+
+  @media (max-width: 900px) {
+    .cols { grid-template-columns: 1fr; }
+    .band { grid-template-columns: repeat(2, 1fr); }
+    .signals { grid-template-columns: 1fr; }
+    .diag .row { grid-template-columns: 1fr; gap: .3rem; }
+    .masthead { flex-wrap: wrap; }
+    .stamp { margin-left: 0; text-align: left; width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="shell">
+
+  <header class="masthead">
+    <svg class="mark" width="60" height="60" viewBox="0 0 60 60" aria-hidden="true">
+      <circle cx="30" cy="30" r="22"></circle>
+      <circle class="node on" cx="30"    cy="8"     r="3.1"></circle>
+      <circle class="node on" cx="40.22" cy="10.52" r="3.1"></circle>
+      <circle class="node on" cx="48.11" cy="17.50" r="3.1"></circle>
+      <circle class="node on" cx="51.84" cy="27.35" r="3.1"></circle>
+      <circle class="node on" cx="50.57" cy="37.80" r="3.1"></circle>
+      <circle class="node on" cx="44.59" cy="46.47" r="3.1"></circle>
+      <circle class="node on" cx="35.26" cy="51.36" r="3.1"></circle>
+      <circle class="node on" cx="24.74" cy="51.36" r="3.1"></circle>
+      <circle class="node"    cx="15.41" cy="46.47" r="3.1"></circle>
+      <circle class="node"    cx="9.43"  cy="37.80" r="3.1"></circle>
+      <circle class="node"    cx="8.16"  cy="27.35" r="3.1"></circle>
+      <circle class="node"    cx="11.89" cy="17.50" r="3.1"></circle>
+      <circle class="node"    cx="19.78" cy="10.52" r="3.1"></circle>
+    </svg>
+    <div>
+      <h1>Progetto Frankl</h1>
+      <p class="lede">Cruscotto del ciclo di ricerca non presidiato: stato, comandi di governo e piano dei task.</p>
+    </div>
+    <div class="stamp">
+      <b>Fotografia</b>
+      12 ago 2026 · 09:04 CEST<br>
+      Z₁₄ chiuso · Z₁₅ oltre le 12 h
+    </div>
+  </header>
+
+  <div class="notice">
+    <span class="k">Statica</span>
+    <p>Questa pagina <strong>fotografa lo stato alle 09:04</strong> del 12 agosto e non si ricarica da sola — l'unica cosa che continua a muoversi è il cronometro del calcolo Z₁₅, che il browser sa calcolare da solo. Il monitor dal vivo resta <span class="mono">STATE/situazione.html</span> sul tuo Mac, che si ricarica ogni 60 secondi.</p>
+  </div>
+
+  <div class="band">
+    <div class="tile" style="--stripe: var(--ok)">
+      <span class="label">Semaforo</span>
+      <span class="value">Tutto bene</span>
+      <span class="foot">nessun intervento richiesto</span>
+    </div>
+    <div class="tile" style="--stripe: var(--ok)">
+      <span class="label">Risultato acquisito</span>
+      <span class="value sm mono">Z₁₄ DIMOSTRATO</span>
+      <span class="foot">UNSAT + certificato verificato</span>
+    </div>
+    <div class="tile" style="--stripe: var(--warn)">
+      <span class="label">Z₁₅ · in corso</span>
+      <span class="value sm">12 h superate</span>
+      <span class="foot">prorogato a 15 h: restano ~3 h</span>
+    </div>
+    <div class="tile" style="--stripe: var(--accent)">
+      <span class="label">Piano</span>
+      <span class="value">10 <span style="color:var(--ink-3); font-size:1rem">/ 13 chiusi</span></span>
+      <span class="foot">poi T10, l'unico passo teorico rimasto</span>
+    </div>
+  </div>
+
+  <div class="cols">
+
+    <!-- ============ COMANDI ============ -->
+    <div>
+      <div class="card">
+        <header>
+          <h2>Governare il ciclo</h2>
+          <span class="hint">click per copiare</span>
+        </header>
+        <div class="body">
+
+          <span class="group-label">Avviare</span>
+          <div class="cmd">
+            <div class="top"><span class="name">Lancia il loop</span><span class="note">da un Terminale, lascialo aperto</span></div>
+            <div class="shell-row">
+              <pre>cd /Users/simonealbanese/Documents/Matematics/frankl
+bash scripts/loop.sh</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+          <div class="cmd">
+            <div class="top"><span class="name">Un solo giro di prova</span><span class="note">per vedere come si comporta</span></div>
+            <div class="shell-row">
+              <pre>MAX_ITER=1 bash scripts/loop.sh</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+
+          <span class="group-label">Guardare cosa fa</span>
+          <div class="cmd">
+            <div class="top"><span class="name">Monitor dal vivo</span><span class="note">la finestra scritta per te</span></div>
+            <div class="shell-row">
+              <pre>open STATE/situazione.html</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+          <div class="cmd">
+            <div class="top"><span class="name">A che punto è</span><span class="note">stato + prossimo task + trappole</span></div>
+            <div class="shell-row">
+              <pre>cat STATE/status.txt STATE/HANDOFF.md</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+          <div class="cmd">
+            <div class="top"><span class="name">Diario del driver</span><span class="note">scorre in diretta</span></div>
+            <div class="shell-row">
+              <pre>tail -f results/logs/loop.log</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+          <div class="cmd">
+            <div class="top"><span class="name">Storico degli esiti</span></div>
+            <div class="shell-row">
+              <pre>tail -n 30 STATE/journal.md</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+
+          <span class="group-label">Il calcolo Z₁₅ in corso</span>
+          <div class="cmd">
+            <div class="top"><span class="name">È ancora vivo?</span><span class="note">fa fede questo, non il log</span></div>
+            <div class="shell-row">
+              <pre>ps -o pid,rss,etime -p 3984 | tail -1
+ls -lh results/z15min3.drat</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+          <div class="cmd">
+            <div class="top"><span class="name">Ha dato un verdetto?</span><span class="note">cerca «s UNSATISFIABLE»</span></div>
+            <div class="shell-row">
+              <pre>tail -n 15 results/logs/T9b_cadical_z15.log</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+
+          <div class="cmd">
+            <div class="top"><span class="name">Il ciclo sta girando?</span><span class="note">driver + ritmo corrente</span></div>
+            <div class="shell-row">
+              <pre>pgrep -lf "bash scripts/loop.sh"
+tail -n 5 results/logs/loop.log</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+
+          <span class="group-label">Verificare la prova di Z₁₄</span>
+          <div class="cmd">
+            <div class="top"><span class="name">Integrità degli artefatti</span><span class="note">2 secondi, non ricalcola nulla</span></div>
+            <div class="shell-row">
+              <pre>shasum -a 256 -c results/FOUND.sha256</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+          <div class="cmd">
+            <div class="top"><span class="name">Leggere il risultato</span></div>
+            <div class="shell-row">
+              <pre>cat results/FOUND.md</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+
+          <span class="group-label">Fermare e riprendere</span>
+          <div class="cmd">
+            <div class="top"><span class="name">Stop pulito</span><span class="note">finisce il giro in corso, poi si ferma</span></div>
+            <div class="shell-row">
+              <pre>echo PAUSE &gt; STATE/status.txt</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+          <div class="cmd">
+            <div class="top"><span class="name">Riprendere</span><span class="note">riparte esattamente da dov'era</span></div>
+            <div class="shell-row">
+              <pre>echo RUN &gt; STATE/status.txt
+bash scripts/loop.sh</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+          <div class="cmd">
+            <div class="top"><span class="name">Calcoli pesanti rimasti accesi</span><span class="note">sopravvivono al Ctrl-C: il PID è nell'handoff</span></div>
+            <div class="shell-row">
+              <pre>ps -o pid,rss,etime,command -p &lt;PID&gt;
+kill &lt;PID&gt;</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+
+          <span class="group-label">Regolare</span>
+          <div class="cmd">
+            <div class="top"><span class="name">Alzare la profondità di ragionamento</span><span class="note">serve solo per T10 (ora: <span class="mono">medium</span>)</span></div>
+            <div class="shell-row">
+              <pre>echo high &gt; STATE/effort.txt</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+          <div class="cmd">
+            <div class="top"><span class="name">Rimetterla normale</span><span class="note">finito il task di progettazione</span></div>
+            <div class="shell-row">
+              <pre>echo medium &gt; STATE/effort.txt</pre>
+              <button class="copy" type="button">Copia</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ STATO ============ -->
+    <div>
+
+      <!-- --- risultato acquisito --- -->
+      <div class="card">
+        <header><h2>Risultato acquisito</h2><span class="hint">results/FOUND.md</span></header>
+        <div class="body">
+
+          <div class="verdict">
+            <div class="head">
+              <span class="tag">Z₁₄ · UNSAT certificato</span>
+              <span class="when">11 ago · 16:50</span>
+            </div>
+            <p>Nessuna famiglia union-closed invariante per rotazione su 14 punti (generatori di taglia ≥ 3) viola la congettura di Frankl. Non è «non trovato»: è <strong>dimostrato che non esiste</strong> — e la dimostrazione è stata <strong>ricontrollata da un verificatore indipendente</strong>, riga per riga.</p>
+          </div>
+
+          <p style="font-size:.86rem; color:var(--ink-2)">GOAL.md chiedeva due solver indipendenti <em>oppure</em> un certificato verificato. Qui valgono entrambe le condizioni, quindi il criterio è soddisfatto con margine.</p>
+
+          <pre class="logblock">  <b>T4</b>  CP-SAT (OR-Tools)
+      {"status": "<b>INFEASIBLE</b>", "m": 14}
+  <b>T6</b>  CaDiCaL su z14min3.cnf (6.237.856 clausole)
+      <b>s UNSATISFIABLE</b>   exit 20, 2240 s
+  <b>T6</b>  drat-trim su z14min3.drat (2,2 GB)
+      <b>s VERIFIED</b>   1736 s · 3.411.578 lemmi in core · 0 RAT</pre>
+          <p class="caption">Estratto dai log <span class="mono">T4_z14_cpsat_min3.log</span>, <span class="mono">T6_cadical_z14.log</span>, <span class="mono">T6_drat_z14.log</span>.</p>
+
+          <div class="verdict flat">
+            <div class="head">
+              <span class="tag">Tappe precedenti</span>
+              <span class="when">T1 · T2 · T3 · T5</span>
+            </div>
+            <p><strong>T1</strong> — 4 controlli di protocollo su 4, exit 0: P([4]) tight, accordo fra i due checker su 50/50 famiglie, Z₇ e Z₁₁ <span class="mono">INFEASIBLE</span>/<span class="mono">UNSAT</span>, encoder pseudo-Booleano validato per forza bruta su 150 istanze.<br>
+            <strong>T2</strong> — regressione Z₁₃: <span class="mono">INFEASIBLE</span> in 15,1 s con 1.863.311 clausole, identiche alla sessione storica (~72 s) ⇒ macchina ≈ 4,8× più veloce.<br>
+            <strong>T3</strong> — sonda Z₁₄: 1180 orbite, 7,32 M clausole, modello 1,01 GB &lt; 9 GB ⇒ calcolo pieno autorizzato.<br>
+            <strong>T5</strong> — CaDiCaL e drat-trim compilati e validati end-to-end su Z₇ e Z₁₁.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- --- calcolo in corso --- -->
+      <div class="card">
+        <header><h2>Il calcolo in corso — Z₁₅</h2><span class="hint">T9b · passo 2 di 3</span></header>
+        <div class="body">
+
+          <div class="verdict wait">
+            <div class="head">
+              <span class="tag">CaDiCaL · prorogato a 15 h</span>
+              <span class="when">21:02:56 → 12:02:56</span>
+            </div>
+            <p>Il primo solver aveva già detto <strong>INFEASIBLE</strong> su Z₁₅ (T9a, ~15 min). Il secondo — indipendente, che scrive la prova passo per passo — ha lavorato dodici ore senza arrivare a un verdetto, e alle 08:58 ha ricevuto <strong>tre ore in più</strong>. Z₁₅ resta per ora <strong>non deciso</strong>: un solo solver non basta, il protocollo ne pretende due.</p>
+          </div>
+
+          <div class="gauge">
+
+            <!-- 1. tempo consumato sul cap del watchdog — si aggiorna da solo -->
+            <div class="g">
+              <div class="g-head">
+                <span class="n">Tempo consumato</span>
+                <span class="v" id="t-val">12 h 01 <em>/ 15 h concesse</em></span>
+              </div>
+              <div class="bar">
+                <div class="fill" id="t-fill" style="width: 80.1%"></div>
+                <div class="band" style="left: 40%; right: 26.7%"></div>
+                <div class="tick" style="left: 33.3%"></div>
+                <div class="tick" style="left: 66.7%"></div>
+                <div class="capline" style="left: 80%; background: var(--warn)"></div>
+                <div class="capline" style="right: 0"></div>
+              </div>
+              <div class="axis">
+                <span class="l">0</span>
+                <span style="left: 33.3%">5 h</span>
+                <span style="left: 66.7%">10 h</span>
+                <span style="left: 90%">13,5 h</span>
+                <span class="r" style="color: var(--crit)">15 h · kill</span>
+              </div>
+            </div>
+
+            <div class="legend">
+              <b><i style="background: var(--warn)"></i>fatto finora</b>
+              <b><i style="background: var(--crit-soft); border: 1px solid var(--crit)"></i>fascia di fine probabile (6–11 h)</b>
+              <b><i style="background: var(--crit)"></i>kill del watchdog</b>
+            </div>
+
+            <p class="g-note alarm" id="t-note"><strong>La stima di ieri sera è stata sfondata.</strong> Prevedeva 20–32 milioni di conflitti e una prova da 5–7 GB; il solver ne ha macinati <strong>quasi 58 milioni</strong> scrivendo <strong>11 GB</strong> — sette volte i conflitti che bastarono a chiudere Z₁₄ — senza avvicinarsi a un verdetto. Le tre ore concesse alle 08:58 aggiungono il 25% del tempo a una scala che finora è cresciuta ben oltre le previsioni: servono più a rendere incontrovertibile la conclusione che a cambiarla.</p>
+
+            <!-- 3. le due misure di merito -->
+            <div class="g">
+              <div class="g-head">
+                <span class="n">Conflitti esplorati</span>
+                <span class="v">57,7 M <em>/ 20–32 M stimati</em></span>
+              </div>
+              <div class="bar sm">
+                <div class="fill" style="width: 100%; background: var(--crit)"></div>
+                <div class="tick" style="left: 25%; background: var(--ink-3)"></div>
+                <div class="band" style="left: 62.5%; right: 0"></div>
+              </div>
+              <div class="axis"><span style="left: 25%">Z₁₄ chiuse qui, a 8 M</span><span class="r" style="color: var(--crit)">stima sfondata 1,8×</span></div>
+            </div>
+
+            <div class="g">
+              <div class="g-head">
+                <span class="n">Prova DRAT scritta</span>
+                <span class="v">11 GB <em>/ 5–7 GB attesi</em></span>
+              </div>
+              <div class="bar sm">
+                <div class="fill" style="width: 100%; background: var(--crit)"></div>
+                <div class="band" style="left: 71%; right: 0"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <table class="facts">
+            <tbody>
+              <tr><th>Formula da decidere</th><td>28.850.111 clausole</td></tr>
+              <tr><th>File CNF su disco</th><td>492 MB</td></tr>
+              <tr><th>Velocità di ricerca</th><td>~850 conflitti/s</td></tr>
+              <tr><th>Memoria usata · tetto</th><td>~2,3 GB · 9 GB</td></tr>
+              <tr><th>Spazio libero su disco</th><td>314 GB</td></tr>
+            </tbody>
+          </table>
+          <p class="caption">Solo la barra del tempo si aggiorna da sola; le altre cifre sono la lettura delle 09:04. Durante la ricerca il log non annuncia nulla: la salute del run si giudica da <span class="mono">ps</span> e dalla crescita regolare del file di prova.</p>
+
+          <p style="font-size:.86rem; color:var(--ink-2)"><strong>Cosa succede alle 12:03.</strong> Se il verdetto non sarà arrivato, il tempo non andrà esteso una quarta volta. La via che resta è quella mai usata su Z₁₄ perché lì non fu necessaria — lo <strong>sharding</strong>: si fissano 8–12 orbite chiave, il problema si spacca in 2ᵏ sottoproblemi indipendenti, ciascuno dentro i budget, e Z₁₅ è UNSAT se e solo se lo sono tutti. È la ricetta di T8, e il ciclo la trova già scritta nel backlog.</p>
+
+        </div>
+      </div>
+
+      <!-- --- il driver --- -->
+      <div class="card">
+        <header><h2>Il ciclo automatico</h2><span class="hint">scripts/loop.sh</span></header>
+        <div class="body">
+
+          <p style="font-size:.86rem; color:var(--ink-2)">Il driver apre una sessione nuova a ogni giro, le fa eseguire <em>un solo</em> task e la chiude: è così che il contesto resta pulito e la memoria vive solo sui file. Mentre un solver macina, l'unico task legittimo è sorvegliarlo — e da stasera il ciclo lo sa.</p>
+
+          <div class="g">
+            <div class="g-head">
+              <span class="n">Iterazioni consumate</span>
+              <span class="v">1 <em>/ 200 disponibili</em></span>
+            </div>
+            <div class="bar sm">
+              <div class="fill" style="width: 0.5%; background: var(--accent)"></div>
+              <div class="capline" style="left: 36%; background: var(--ok)"></div>
+            </div>
+            <div class="axis"><span style="left: 36%; color: var(--ok)">~72 = quanto ne serve fino a fine lavoro</span></div>
+          </div>
+
+          <table class="facts">
+            <tbody>
+              <tr><th>Processo</th><td>PID 28034 · dalle 22:41</td></tr>
+              <tr><th>Ritmo con un job sotto watchdog</th><td>1 controllo / ~11 min</td></tr>
+              <tr><th>Ritmo quando c'è da lavorare</th><td>1 giro / ~1,3 min</td></tr>
+              <tr><th>Profondità di ragionamento</th><td>medium</td></tr>
+              <tr><th>Modello</th><td>claude-fable-5</td></tr>
+            </tbody>
+          </table>
+
+          <p style="font-size:.86rem; color:var(--ink-2)"><strong>La pausa è adattiva.</strong> Prima il ciclo ripartiva ogni 8 secondi anche quando non c'era nulla da fare se non guardare un processo vivo: centinaia di sessioni per dire «sta ancora lavorando». Ora, se trova un job sotto watchdog, aspetta 10 minuti. Coprire l'intera nottata costava ~558 iterazioni, adesso ne costa ~72 — e appena il solver finisce il ciclo torna da solo al passo veloce, così i task che seguono non pagano l'attesa.</p>
+
+          <div class="verdict flat">
+            <div class="head"><span class="tag">Se il ciclo si ferma</span></div>
+            <p>Il solver e il suo watchdog sono processi <strong>indipendenti dal driver</strong>: vanno avanti fino alle 09:03 comunque. Fermare il ciclo costa solo l'automatismo — il verdetto resta nel log ad aspettare, e <span class="mono">bash scripts/loop.sh</span> riprende esattamente da lì.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- --- confronto casi --- -->
+      <div class="card">
+        <header><h2>Quanto cresce il problema</h2><span class="hint">un passo = ×4 circa</span></header>
+        <div class="body">
+          <table class="facts">
+            <thead>
+              <tr><th>Caso</th><th>Orbite</th><th>Clausole</th><th>Esito</th></tr>
+            </thead>
+            <tbody>
+              <tr><th>Z₁₃ <em style="font-style:normal;color:var(--ink-3)">(storico)</em></th><td>630</td><td>1,86 M</td><td class="ok">chiuso</td></tr>
+              <tr><th>Z₁₄</th><td>1180</td><td>7,32 M</td><td class="ok">chiuso</td></tr>
+              <tr><th>Z₁₅</th><td>2190</td><td>28,8 M</td><td>in corso</td></tr>
+            </tbody>
+          </table>
+          <p class="caption">Z₁₅ è il primo caso con modulo non primo: le orbite hanno periodi diversi (2 di periodo 3, 6 di periodo 5, 2182 di periodo 15) e i coefficienti sono stati ricontrollati dal guardrail di divisibilità prima di procedere.</p>
+        </div>
+      </div>
+
+      <!-- --- macchina --- -->
+      <div class="card">
+        <header><h2>La macchina</h2><span class="hint">STATE/hardware.env</span></header>
+        <div class="body">
+          <table class="facts">
+            <tbody>
+              <tr><th>Chip</th><td>Apple M4 · 4P + 6E</td></tr>
+              <tr><th>Memoria</th><td>16 GB</td></tr>
+              <tr><th>Tetto RAM per job</th><td>9 GB</td></tr>
+              <tr><th>Core concessi a un job</th><td>3</td></tr>
+              <tr><th>Timeout base · escalation</th><td>20 min · 60 min</td></tr>
+              <tr><th>Interprete del progetto</th><td>.venv · Python 3.13.12</td></tr>
+              <tr><th>Profondità di ragionamento</th><td>medium</td></tr>
+            </tbody>
+          </table>
+          <p class="caption">Il run CaDiCaL su Z₁₅ era partito con un cap dedicato di 120 minuti — la stima di 37 minuti misurata su Z₁₄, moltiplicata con generosità. Poi due estensioni: alle 22:14 l'escalation ×3 che il protocollo concede <strong>una volta sola</strong>, e alle 22:22 il passaggio a <strong>12 ore piene</strong> per decisione del proprietario del progetto — quest'ultima fuori protocollo, quindi non ripetibile dal ciclo in autonomia.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ PIANO ============ -->
+  <section class="block">
+    <div class="card">
+      <header><h2>Il piano di ricerca</h2><span class="hint">si esegue solo il primo non spuntato</span></header>
+      <div class="body">
+        <ul class="track">
+          <li class="done"><span class="id">T1</span><span class="what">Controlli obbligatori di protocollo <em>— la rete di sicurezza che rende credibile tutto il resto</em></span><span class="chip done">fatto</span></li>
+          <li class="done"><span class="id">T2</span><span class="what">Regressione Z₁₃ <em>— la macchina riproduce il risultato storico</em></span><span class="chip done">fatto</span></li>
+          <li class="done"><span class="id">T3</span><span class="what">Sonda economica su Z₁₄ <em>— orbite, clausole e RAM misurate prima di calcolare</em></span><span class="chip done">fatto</span></li>
+          <li class="done"><span class="id">T4</span><span class="what">Z₁₄ con CP-SAT monolitico <em>— primo solver: INFEASIBLE</em></span><span class="chip done">fatto</span></li>
+          <li class="done"><span class="id">T5</span><span class="what">Toolchain di certificazione: CaDiCaL + drat-trim <em>— compilati e validati su Z₇/Z₁₁</em></span><span class="chip done">fatto</span></li>
+          <li class="done"><span class="id">T6</span><span class="what">Z₁₄ con prova DRAT verificata <em>— secondo solver + certificato: caso chiuso</em></span><span class="chip done">fatto</span></li>
+          <li class="obs"><span class="id">T7</span><span class="what">Encoding alternativo del margine <em>— decaduto: serviva solo se Z₁₄ fosse rimasto indeciso</em></span><span class="chip obs">decaduto</span></li>
+          <li class="obs"><span class="id">T8</span><span class="what">Sharding di Z₁₄ su orbite chiave <em>— decaduto: risolto senza spezzare, resta il piano B per Z₁₅</em></span><span class="chip obs">decaduto</span></li>
+          <li class="done"><span class="id">T9</span><span class="what">Z₁₅: misura del modello e scelta della strada <em>— 2190 orbite, 2,41 GB: si procede come per Z₁₄</em></span><span class="chip done">fatto</span></li>
+          <li class="done"><span class="id">T9a</span><span class="what">Z₁₅ con CP-SAT monolitico <em>— primo solver: INFEASIBLE in ~15 min</em></span><span class="chip done">fatto</span></li>
+          <li class="run"><span class="id">T9b</span><span class="what">Z₁₅ con prova DRAT verificata <em>— CaDiCaL sta lavorando, poi il controllo del certificato</em></span><span class="chip run">in corso</span></li>
+          <li class="next"><span class="id">T10</span><span class="what">Gruppi transitivi su 14–16 punti senza cicli lunghi <em>— dove Cauchy non basta più: estende il risultato oltre il caso ciclico</em></span><span class="chip hi">effort high</span></li>
+          <li><span class="id">T11</span><span class="what">Ricerca locale con obiettivi surrogati <em>— ultima carta, valore atteso basso</em></span><span class="chip">in coda</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SEMAFORO ============ -->
+  <section class="block">
+    <h2>Se il semaforo cambia</h2>
+    <p class="sub">Lo trovi in cima a <span class="mono">STATE/situazione.html</span> e a <span class="mono">STATE/SITUAZIONE.md</span>, riscritto a ogni iterazione.</p>
+    <div class="signals">
+      <div class="sig">
+        <span class="t"><span class="dot" style="background: var(--ok)"></span>Verde</span>
+        <p>Sta lavorando. Non serve fare niente. I calcoli lunghi possono tenere il Mac occupato per ore: è previsto.</p>
+      </div>
+      <div class="sig">
+        <span class="t"><span class="dot" style="background: var(--warn)"></span>Giallo</span>
+        <p>Rallentamenti — di solito un run lungo che non ha ancora dato verdetto. Guarda <code>tail -f results/logs/loop.log</code> e lascia lavorare.</p>
+      </div>
+      <div class="sig">
+        <span class="t"><span class="dot" style="background: var(--crit)"></span>Rosso</span>
+        <p>Il ciclo si è fermato e chiede te. Apri <code>STATE/HANDOFF.md</code>: contiene un'analisi onesta e le alternative fra cui scegliere.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DIAGNOSTICA ============ -->
+  <section class="block">
+    <div class="card">
+      <header><h2>Cose che sembrano guasti e non lo sono</h2></header>
+      <div class="body">
+        <div class="diag">
+          <div class="row">
+            <div class="sym">Il log del solver è fermo da minuti, o sputa righe incomprensibili senza mai dire nulla</div>
+            <div class="fix"><strong>Normale: durante la ricerca il solver non annuncia niente.</strong> La salute del run si legge altrove — <span class="mono">ps</span> dice che è vivo e quanta memoria usa, e il file <span class="mono">.drat</span> che cresce dice che sta ancora producendo prova. Il verdetto arriva tutto insieme alla fine.</div>
+          </div>
+          <div class="row">
+            <div class="sym">Ignoring 14 permissions.allow entries … this workspace has not been trusted</div>
+            <div class="fix"><strong>Normale, compare a ogni giro.</strong> I permessi del loop arrivano dai flag di <span class="mono">scripts/loop.sh</span>, non da quel file. L'avviso sparisce quando apri Claude dentro la cartella e accetti il dialogo di fiducia.</div>
+          </div>
+          <div class="row">
+            <div class="sym">ModuleNotFoundError: No module named 'ortools'</div>
+            <div class="fix"><strong>Hai usato <span class="mono">python3</span> nudo.</strong> Fuori dal loop quello è Python 3.14 senza le librerie. Usa sempre <span class="mono">.venv/bin/python3</span> — attenzione, la sola versione stampata non distingue i due.</div>
+          </div>
+          <div class="row">
+            <div class="sym">File enormi in results/ (2,2 GB, e presto ~10 GB)</div>
+            <div class="fix"><strong>Sono le prove, non spazzatura.</strong> <span class="mono">z14min3.cnf</span>, <span class="mono">z14min3.drat</span> e i corrispettivi di Z₁₅ vanno conservati: sono ciò che rende il risultato riverificabile da chiunque. Gli hash stanno in <span class="mono">results/FOUND.sha256</span>. Non aprirli mai in un editor.</div>
+          </div>
+          <div class="row">
+            <div class="sym">Limiti/token probabilmente esauriti</div>
+            <div class="fix"><strong>Il driver si è fermato pulito dopo 4 fallimenti.</strong> Non si perde nulla: lo stato è su disco. Rilancia più tardi con <span class="mono">bash scripts/loop.sh</span> e riprende dal punto esatto.</div>
+          </div>
+          <div class="row">
+            <div class="sym">Il loop sembra fermo: nessuna riga nuova da minuti</div>
+            <div class="fix"><strong>È la pausa adattiva, non uno stallo.</strong> Quando c'è un job sotto watchdog il ciclo controlla ogni 10 minuti invece che ogni 8 secondi: sorvegliare più spesso non farebbe finire prima il calcolo, costerebbe solo sessioni. Nel log trovi la riga <span class="mono">(job sotto watchdog: prossimo controllo fra 600s)</span>. Appena il solver finisce, il ciclo torna da solo al passo veloce.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Cartella: <span class="mono">~/Documents/Matematics/frankl</span></span>
+    <span>Modello fisso: <span class="mono">claude-fable-5</span>, nessun fallback</span>
+    <span>Stato su disco: <span class="mono">STATE/</span> · log: <span class="mono">results/logs/</span></span>
+    <span>Prova Z₁₄: <span class="mono">results/FOUND.md</span></span>
+  </footer>
+
+</div>
+
+<script>
+  /* Cronometro del run CaDiCaL su Z15.
+     Avvio verificato con `ps lstart`: 2026-08-11 21:02:56 CEST (= 19:02:56 UTC).
+     Cap: 15 h dall'avvio del run (watchdog PID 91586, KILL 12:02:56).
+     Il tempo trascorso è l'unica grandezza che il
+     browser può ricavare da sé: tutto il resto in pagina resta la lettura delle 09:04. */
+  (function () {
+    var START = Date.UTC(2026, 7, 11, 19, 2, 56);
+    var CAP_MIN = 900;   // 15 h dall'avvio del run dopo la terza proroga: KILL alle 12:02:56
+    var fill = document.getElementById('t-fill');
+    var val = document.getElementById('t-val');
+    var note = document.getElementById('t-note');
+    if (!fill || !val) return;
+
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+    function tick() {
+      var min = (Date.now() - START) / 60000;
+      if (!isFinite(min) || min < 0) min = 0;
+
+      fill.style.width = Math.min(100, (min / CAP_MIN) * 100).toFixed(2) + '%';
+
+      var h = Math.floor(min / 60), m = Math.floor(min % 60);
+      val.innerHTML = (h > 0 ? h + ' h ' + pad(m) : m + ' min') + ' <em>/ 15 h concesse</em>';
+
+      if (min >= CAP_MIN) {
+        fill.classList.add('done');
+        val.innerHTML = 'cap esaurito <em>/ 15 h</em>';
+        if (note && note.dataset.done !== '1') {
+          note.dataset.done = '1';
+          note.className = 'g-note alarm';
+          note.innerHTML = '<strong>Il watchdog ha raggiunto il suo limite.</strong> ' +
+            'Il run è stato terminato: l\'esito reale — verdetto naturale appena prima, ' +
+            'oppure <span class="mono">KILL TIMEOUT</span> — sta in ' +
+            '<span class="mono">STATE/journal.md</span> e in <span class="mono">STATE/HANDOFF.md</span>. ' +
+            'Questa pagina non lo sa: è ferma alle 22:01.';
+        }
+      }
+    }
+
+    tick();
+    setInterval(tick, 30000);
+  })();
+
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var pre = btn.parentElement.querySelector('pre');
+      if (!pre) return;
+      var text = pre.innerText;
+      var done = function () {
+        btn.textContent = 'Copiato';
+        btn.dataset.done = '1';
+        setTimeout(function () { btn.textContent = 'Copia'; btn.dataset.done = '0'; }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+      } else {
+        fallback(text, done);
+      }
+    });
+  });
+  function fallback(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) { /* niente da fare */ }
+    document.body.removeChild(ta);
+  }
+</script>
+
+</body>
+</html>

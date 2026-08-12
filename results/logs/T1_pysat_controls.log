@@ -1,0 +1,5 @@
+  Z_7: 18 orbite, PB 489 cls (aux fino a v120), chiusura 407 cls su 171 coppie [all] (build 0s)
+  CONTROLLO pysat Z_7 (atteso UNSAT): {'status': 'UNSAT', 'm': 7, 'secs': 0.0, 'clauses': 407}
+  Z_11: 186 orbite, PB 6194 cls (aux fino a v1382), chiusura 117373 cls su 17391 coppie [all] (build 0s)
+  CONTROLLO pysat Z_11 (atteso UNSAT): {'status': 'UNSAT', 'm': 11, 'secs': 0.5, 'clauses': 117373}
+  [OK] pipeline pysat validata su Z_7, Z_11

@@ -1,0 +1,30 @@
+{
+  "model": "claude-fable-5",
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Bash",
+      "Read",
+      "Write",
+      "Edit",
+      "MultiEdit",
+      "Glob",
+      "Grep",
+      "LS",
+      "TodoWrite",
+      "Task",
+      "Agent",
+      "BashOutput",
+      "KillShell",
+      "NotebookEdit"
+    ],
+    "deny": [
+      "Bash(sudo:*)"
+    ]
+  },
+  "env": {
+    "PATH": "/Users/simonealbanese/Documents/Matematics/frankl/.venv/bin:/Users/simonealbanese/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Developer/CommandLineTools/usr/bin",
+    "VIRTUAL_ENV": "/Users/simonealbanese/Documents/Matematics/frankl/.venv",
+    "PYTHONUNBUFFERED": "1"
+  }
+}
