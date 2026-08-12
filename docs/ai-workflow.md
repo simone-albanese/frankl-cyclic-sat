@@ -15,6 +15,61 @@ The primary sources are preserved verbatim (in Italian):
 [STATE/backlog.md](../STATE/backlog.md) (the task ledger),
 [STATE/HANDOFF.md](../STATE/HANDOFF.md) (the final handoff).
 
+## The concrete setup: Claude Code
+
+The agent runtime is **[Claude Code](https://claude.com/claude-code)**,
+Anthropic's terminal-based agent CLI, used in two modes:
+
+- **Unattended**: the owner launched `bash scripts/loop.sh` from a clean
+  Terminal and walked away. Each iteration of the driver spawns a brand-new
+  headless Claude Code session — this is the actual invocation, from
+  [scripts/loop.sh](../scripts/loop.sh):
+
+  ```bash
+  caffeinate -i claude --model claude-fable-5 --permission-mode acceptEdits \
+      --effort "$EFFORT" --strict-mcp-config \
+      -p "Leggi CLAUDE.md e STATE/HANDOFF.md, poi esegui UNA sola iterazione
+          del ciclo operativo e termina." \
+      --disallowedTools "Bash(sudo:*)" \
+      --allowedTools Bash Read Write Edit MultiEdit Glob Grep LS TodoWrite \
+                     Task Agent BashOutput KillShell NotebookEdit
+  ```
+
+- **Interactive**: for the handful of human decisions — the trust dialog, the
+  deadline extensions, the final feasibility analysis (the owner's actual
+  prompt for it is preserved in
+  [STATE/prompt-simulazione-tempi.md](../STATE/prompt-simulazione-tempi.md)),
+  and the shutdown-and-publish session.
+
+Configuration choices that mattered, all visible in the repo:
+
+- **Model pinned three ways** to `claude-fable-5` — the `--model` flag in the
+  driver, the `"model"` key in
+  [.claude/settings.json](../.claude/settings.json), and `/model` in
+  interactive sessions — with **no fallback model configured**, so an API
+  overload produces a retryable error rather than a silent model downgrade
+  mid-proof. (The final analysis/publication session ran interactively on
+  Claude Opus.)
+- **Permissions on the command line** (`--allowedTools`/`--disallowedTools`),
+  not only in `settings.json`: in a not-yet-trusted workspace Claude Code
+  ignores the settings allowlist wholesale, which silently paralyzed the first
+  loop attempt. `--dangerously-skip-permissions` was deliberately never used;
+  `sudo` is denied outright.
+- **Context hygiene per iteration**: `--strict-mcp-config` (no MCP servers —
+  dozens of irrelevant tool definitions would tax every session's context) and
+  `-p` one-shot mode, so each iteration is born with an empty conversation.
+- **Reasoning effort as a per-task dial**: the driver re-reads
+  `STATE/effort.txt` every round and passes it as `--effort` (default
+  `medium`; `high` reserved for design tasks). Two hundred iterations at
+  maximum effort would have burned the token budget on babysitting.
+- **Adaptive cadence**: when a watchdogged job is running, the driver sleeps
+  600 s between sessions instead of 8 s — surveillance is throttled without
+  slowing the underlying computation, whose verdict waits in the log.
+- **Environment scrubbing**: the driver unsets inherited `CLAUDE_*`/session
+  variables at startup, after discovering that launching it from inside
+  another Claude Code session contaminated the children (inherited effort
+  overrides, wrong session sockets).
+
 ## The architecture: amnesia by design
 
 The core problem of long-running agentic work is context: a session that
@@ -129,10 +184,12 @@ the moment it was paid for. Highlights, translated:
   session contaminated child sessions with a dozen inherited variables
   (including one that silently overrode the per-task effort dial). Fix: the
   driver scrubs its environment at startup.
-- **Surveillance cadence**: the loop babysat a 13-hour solver with a fresh
-  ~10-minute check-in session, ~70 nearly identical journal entries. Honest
-  verdict: a cron job with a one-line liveness check would have done this for
-  free; fresh-context iterations are the wrong tool for pure waiting.
+- **Surveillance cadence**: even with the driver's adaptive throttle (one
+  check-in every ~10 minutes instead of every 8 seconds while a watchdogged
+  job ran), babysitting the 13-hour solver still consumed ~70 nearly identical
+  model sessions and journal entries. Honest verdict: a cron job with a
+  one-line liveness check would have done the waiting for free; full model
+  sessions are the wrong tool for pure waiting, throttled or not.
 - **Forecasting refutations**: the project's own logs show why time estimates
   kept failing — Z14 sat at 62% remaining variables for twelve minutes and
   then finished in 0.3 s. CDCL refutation is not a progress bar. The final
@@ -152,3 +209,8 @@ conjecture with a decidable finite structure and a pair of independent
 checkers, and the same machinery applies. The one transferable core lesson:
 **let the agent be brilliant inside an iteration, and let the filesystem — not
 the agent — be the memory.**
+
+*Transparency note: this documentation, like the computations it describes,
+was drafted by Claude (in the final interactive Claude Code session) and
+reviewed by the project owner. Every quantitative claim in it is traceable to
+a log file in this repository.*

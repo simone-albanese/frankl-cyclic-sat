@@ -16,4 +16,5 @@ abstract: >-
   by one exact method (CP-SAT, infeasible) and left honestly unconfirmed, with
   a reproducible pipeline, measured resource costs, and a concrete plan for
   completing it. The search itself was executed autonomously by an AI agent
-  loop (Claude) under human supervision.
+  loop built on Anthropic's Claude Code (model Claude Fable 5) under human
+  supervision.

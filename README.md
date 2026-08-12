@@ -284,14 +284,18 @@ finding the *tightest* symmetric families — is in
 ## How this was made
 
 Every computation in this repository was planned, launched, monitored and
-recorded by an AI agent (Claude) running in an autonomous loop: ~160 short
-fresh-context iterations over two days, each reading the project state from
-files, executing one atomic task, and writing the state back — under hard
-resource budgets, OS-level watchdogs, and a protocol that forbids declaring
-success without independent verification. The human owner set the goals,
-granted (and three times extended) time budgets, and made the final call to
-stop Z15 and publish. The full methodology, including what failed and the
-operational lessons learned, is documented in
+recorded by an AI agent running in an autonomous loop built on
+**[Claude Code](https://claude.com/claude-code)**, Anthropic's terminal agent
+(model pinned to Claude Fable 5, no fallback): ~160 short fresh-context
+headless sessions over two days, each spawned by a 100-line bash driver
+([scripts/loop.sh](scripts/loop.sh)) with one instruction — read the
+constitution and the handoff file, execute one atomic task, terminate — under
+hard resource budgets, OS-level watchdogs, and a protocol that forbids
+declaring success without independent verification. The human owner set the
+goals, granted (and three times extended) time budgets, and made the final
+call — in an interactive session — to stop Z15 and publish. The full setup
+(exact CLI invocation, permission model, per-task effort dial), including what
+failed and the operational lessons learned, is documented in
 [docs/ai-workflow.md](docs/ai-workflow.md); the raw diary (1,297 lines,
 Italian) is preserved verbatim in [STATE/journal.md](STATE/journal.md).
 
