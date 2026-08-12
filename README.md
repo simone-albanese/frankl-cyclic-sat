@@ -276,6 +276,7 @@ finding the *tightest* symmetric families — is in
 | [docs/getting-started.md](docs/getting-started.md) | the amateur's on-ramp, no prerequisites |
 | [docs/open-problems.md](docs/open-problems.md) | what remains, what it costs, where to start |
 | [docs/ai-workflow.md](docs/ai-workflow.md) | how an AI agent loop ran this project autonomously |
+| [docs/playbook.md](docs/playbook.md) | the reusable field guide: what breaks (and what to copy) when attacking other open problems with this agent + hardware configuration |
 | [ucs_core.py](ucs_core.py) | bitmask families, closure, exact checker no. 1 |
 | [checker2.py](checker2.py) | independent checker no. 2 |
 | [controls.py](controls.py) | the mandatory control gauntlet |
