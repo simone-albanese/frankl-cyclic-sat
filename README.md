@@ -213,9 +213,12 @@ Full provenance (solver commits, exact commands, log paths):
 The tiny $\mathbb{Z}_7$ and $\mathbb{Z}_{11}$ certificates are checked into the
 repository (`results/dimacs/`), so you can run drat-trim on a real certificate
 seconds after cloning. The large CNF/DRAT files exceed GitHub's limits and are
-excluded from git; they are deterministic outputs of the pipeline and their
+excluded from git; they are deterministic outputs of the pipeline, their
 SHA-256 hashes are recorded in [results/FOUND.sha256](results/FOUND.sha256) and
-[results/Z15-PARTIAL.md](results/Z15-PARTIAL.md).
+[results/Z15-PARTIAL.md](results/Z15-PARTIAL.md), and the three with evidential
+value (the Z14 CNF + verified certificate, and the Z15 CNF) are downloadable
+xz-compressed from
+[release v1.0.0](https://github.com/simone-albanese/frankl-cyclic-sat/releases/tag/v1.0.0).
 
 ## Where it stopped: the 16 GB wall
 

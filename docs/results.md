@@ -130,9 +130,11 @@ f9283cb30b0b5dc78faa123d57774cf2589924b1066e0bb2f9d45732ca59bab4  results/z14min
 ```
 
 Both hashes re-verified OK on 12 Aug 2026. The files themselves exceed GitHub
-limits and are not in git; regeneration is deterministic for the CNF (same
-generator code ⇒ same bytes) and the DRAT re-emitted by the same CaDiCaL commit
-on the same CNF verifies identically even if not byte-identical.
+limits and are not in git; they are published xz-compressed as
+[release v1.0.0 assets](https://github.com/simone-albanese/frankl-cyclic-sat/releases/tag/v1.0.0).
+Regeneration is in any case deterministic for the CNF (same generator code ⇒
+same bytes), and a DRAT re-emitted by the same CaDiCaL commit on the same CNF
+verifies identically even if not byte-identical.
 
 ## 3. $\mathbb{Z}_{15}$ — CP-SAT says infeasible; independent confirmation not completed
 

@@ -164,10 +164,20 @@ scratch without re-running any solver.
 
 **Where are the big files?** `results/*.cnf` and `results/*.drat` are excluded
 from git (GitHub's 100 MB/file limit; the Z15 partial trace alone is 11.87
-GiB). They currently live on the original machine. For permanent public
-archival, a Zenodo deposit (free, DOI, 50 GB/dataset) of
-`z14min3.cnf` + `z14min3.drat` (+ optionally the regenerated Z13 pair) is the
-intended route; the DRAT text proofs compress well (`xz`, or drat-trim's
-bundled `compress` tool) and would fit GitHub Releases (< 2 GiB/asset) after
-compression. Until such a deposit exists, regeneration per §3–4 *is* the
-distribution mechanism, and the hashes above are the ground truth for the CNFs.
+GiB). The three artifacts with evidential value — `z14min3.cnf`,
+`z14min3.drat` (the verified certificate) and `z15min3.cnf` — are published
+xz-compressed as assets of
+**[release v1.0.0](https://github.com/simone-albanese/frankl-cyclic-sat/releases/tag/v1.0.0)**,
+together with a `SHA256SUMS.txt` covering both the compressed and the original
+files. To use them:
+
+```bash
+unxz z14min3.cnf.xz z14min3.drat.xz          # restores the original bytes
+shasum -a 256 -c results/FOUND.sha256         # must say OK twice
+tools/drat-trim/drat-trim results/z14min3.cnf results/z14min3.drat   # s VERIFIED
+```
+
+The Z15 partial DRAT trace is *not* published: it certifies nothing and would
+be 12 GB of dead weight. For permanent DOI'd archival a Zenodo deposit remains
+the intended final home (open problem 6); meanwhile regeneration per §3–4 is
+always available, and the hashes above stay the ground truth for the CNFs.
