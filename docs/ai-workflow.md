@@ -41,6 +41,13 @@ Anthropic's terminal-based agent CLI, used in two modes:
   [STATE/prompt-simulazione-tempi.md](../STATE/prompt-simulazione-tempi.md)),
   and the shutdown-and-publish session.
 
+How the project is born is itself preserved:
+[setup_frankl.sh](../setup_frankl.sh) is the self-extracting script the owner
+ran to lay down the seed files (constitution, sources, goal), after which
+opening Claude Code in the folder and typing `bootstrap` created everything
+else. The extracted seeds are byte-identical to the files tracked in this
+repository.
+
 Configuration choices that mattered, all visible in the repo:
 
 - **Model pinned three ways** to `claude-fable-5` — the `--model` flag in the
