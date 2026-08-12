@@ -177,7 +177,10 @@ shasum -a 256 -c results/FOUND.sha256         # must say OK twice
 tools/drat-trim/drat-trim results/z14min3.cnf results/z14min3.drat   # s VERIFIED
 ```
 
-The Z15 partial DRAT trace is *not* published: it certifies nothing and would
-be 12 GB of dead weight. For permanent DOI'd archival a Zenodo deposit remains
-the intended final home (open problem 6); meanwhile regeneration per §3–4 is
-always available, and the hashes above stay the ground truth for the CNFs.
+The same three artifacts are also permanently archived — independent of any
+GitHub account — at Zenodo (CERN):
+**[doi:10.5281/zenodo.21900943](https://doi.org/10.5281/zenodo.21900943)**.
+
+The Z15 partial DRAT trace is *not* published anywhere: it certifies nothing
+and would be 12 GB of dead weight. Regeneration per §3–4 remains always
+available, and the hashes above stay the ground truth for the CNFs.

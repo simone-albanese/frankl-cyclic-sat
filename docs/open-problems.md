@@ -145,14 +145,14 @@ exercise in toolchain plumbing (DRAT → LRAT conversion), with a real payoff in
 credibility. Warning from experience: drat-trim's memory-out paths exit with
 code 0 — grep for `s VERIFIED`, never trust exit codes.
 
-## Problem 6 — Permanent archival of the heavy artifacts
+## Problem 6 — Permanent archival of the heavy artifacts ✅ (done 2026-08-12)
 
-Partially done: the Z14 certificate pair and the Z15 CNF are published
-xz-compressed as
+The Z14 certificate pair and the Z15 CNF are published xz-compressed both as
 [release v1.0.0 assets](https://github.com/simone-albanese/frankl-cyclic-sat/releases/tag/v1.0.0)
-with hashes. What remains: a **Zenodo deposit** (free, 50 GB/dataset,
-citable DOI) so the artifacts survive independently of any GitHub account,
-plus optionally a regenerated Z13 pair. Zero mathematics, real archival value.
+and as a DOI'd Zenodo dataset:
+**[doi:10.5281/zenodo.21900943](https://doi.org/10.5281/zenodo.21900943)**
+(concept DOI for all future versions: 10.5281/zenodo.21900942). Optional
+leftover: adding a regenerated Z13 CNF+DRAT pair as a new Zenodo version.
 
 ## Problem 7 — Local search with a better landscape (low expected value, kept honest)
 

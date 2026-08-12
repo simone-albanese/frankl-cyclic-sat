@@ -8,6 +8,7 @@ type: software
 date-released: 2026-08-12
 version: "1.0.0"
 license: MIT
+doi: 10.5281/zenodo.21900943
 abstract: >-
   Computer-assisted decision of the rotation-invariant case of Frankl's
   union-closed sets conjecture. No rotation-invariant counterexample exists on

@@ -131,7 +131,9 @@ f9283cb30b0b5dc78faa123d57774cf2589924b1066e0bb2f9d45732ca59bab4  results/z14min
 
 Both hashes re-verified OK on 12 Aug 2026. The files themselves exceed GitHub
 limits and are not in git; they are published xz-compressed as
-[release v1.0.0 assets](https://github.com/simone-albanese/frankl-cyclic-sat/releases/tag/v1.0.0).
+[release v1.0.0 assets](https://github.com/simone-albanese/frankl-cyclic-sat/releases/tag/v1.0.0)
+and permanently archived at Zenodo
+([doi:10.5281/zenodo.21900943](https://doi.org/10.5281/zenodo.21900943)).
 Regeneration is in any case deterministic for the CNF (same generator code ⇒
 same bytes), and a DRAT re-emitted by the same CaDiCaL commit on the same CNF
 verifies identically even if not byte-identical.

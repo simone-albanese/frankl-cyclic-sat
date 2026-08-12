@@ -1,5 +1,7 @@
 # Frankl's Union-Closed Sets Conjecture Under Rotational Symmetry
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21900943.svg)](https://doi.org/10.5281/zenodo.21900943)
+
 **A computer-assisted case study: no rotation-symmetric counterexample exists on 13
 or 14 points — with machine-checkable certificates — and a precisely documented
 attempt at 15 points that ran into the memory wall of a 16 GB laptop.**
@@ -218,7 +220,9 @@ SHA-256 hashes are recorded in [results/FOUND.sha256](results/FOUND.sha256) and
 [results/Z15-PARTIAL.md](results/Z15-PARTIAL.md), and the three with evidential
 value (the Z14 CNF + verified certificate, and the Z15 CNF) are downloadable
 xz-compressed from
-[release v1.0.0](https://github.com/simone-albanese/frankl-cyclic-sat/releases/tag/v1.0.0).
+[release v1.0.0](https://github.com/simone-albanese/frankl-cyclic-sat/releases/tag/v1.0.0)
+and permanently archived at Zenodo:
+[doi:10.5281/zenodo.21900943](https://doi.org/10.5281/zenodo.21900943).
 
 ## Where it stopped: the 16 GB wall
 
