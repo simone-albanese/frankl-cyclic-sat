@@ -51,8 +51,21 @@ recorded in [results/Z15-PARTIAL.md](../results/Z15-PARTIAL.md).)
 
 ## Problem 1 — Confirm $\mathbb{Z}_{15}$ (the most valuable next step)
 
-**Status:** CP-SAT says INFEASIBLE [M]; no independent confirmation, no
-certificate. One of the following closes it.
+> **✅ RESOLVED 14 Aug 2026 — on the same 16 GB laptop.** Neither Route A nor
+> B-as-written won: the key was diagnosing that the wall was the *certificate
+> format*. CaDiCaL rerun with **LRAT** output (streaming-verifiable) on the
+> byte-identical frozen CNF: **UNSAT in 20 h 26 m**, 147 GB text certificate
+> (sha256 `9d8b6b72…`), verified by `lrat-check` in **22.6 min** at ~formula-
+> sized RAM. Bonus data from the attempt: the Route A probe confirmed the skew
+> warning below in its sharpest form (shards with 8 fixed orbits die in 2–17 s;
+> the all-excluded corner is the monolith), and a cutting-planes solver (Exact),
+> despite being the structurally right engine, measured ~200× slower than
+> CP-SAT on these instances. Full record:
+> [Z15-CLOSED.md](https://github.com/simone-albanese/frankl-transitive-sat/blob/main/results/Z15-CLOSED.md).
+> The text below is kept as written, as the costed plan that led there.
+
+**Status:** ~~CP-SAT says INFEASIBLE [M]; no independent confirmation, no
+certificate.~~ **Closed** — see banner. One of the following was to close it.
 
 **Route A — sharding (fits ordinary machines).** Pick $k$ orbits (take the
 $k$ smallest-size, most-negative-coefficient ones); for each of the $2^k$

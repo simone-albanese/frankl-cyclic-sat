@@ -2,9 +2,11 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21900943.svg)](https://doi.org/10.5281/zenodo.21900943)
 
-**A computer-assisted case study: no rotation-symmetric counterexample exists on 13
-or 14 points — with machine-checkable certificates — and a precisely documented
-attempt at 15 points that ran into the memory wall of a 16 GB laptop.**
+**A computer-assisted case study: no rotation-symmetric counterexample exists on
+13, 14 — or 15 — points, each with machine-checkable certificates. The 15-point
+case first ran into the memory wall of a 16 GB laptop, was published here as an
+open problem, and was closed two days later on the same laptop by switching the
+certificate format to one that verifies in a stream (see Result 3).**
 
 This repository contains everything: the mathematics, the code, the solver logs,
 the proof-certificate hashes, the resource measurements, the open problems, and
@@ -133,21 +135,29 @@ lemmas in core, 315,224,851 resolution steps, zero problematic RAT lemmas. The
 three different periods (2, 7, 14), and — unlike on 13 points — the transitive
 story is *not* automatically covered (see open problem 4).
 
-**Result 3 (15 points — decided by one method, honestly unconfirmed).**
+**Result 3 (15 points — CLOSED 14 Aug 2026, with a verified certificate).**
 CP-SAT declares the 15-point instance (2,190 orbits, 28.8 million closure
-clauses, sizes ≥ 3) **infeasible in ~15 minutes**. Taken at face value: no
-rotation-invariant counterexample exists on 15 points either. But this project's
-own standard demands two independent methods or a verified certificate, and the
-independent confirmation did not finish: CaDiCaL ran for **12 h 56 m** (63.0
-million conflicts, 33.7 billion propagations) without a verdict and was stopped,
-leaving an 11.87 GiB partial proof trace that certifies nothing. A feasibility
-analysis (in [docs/open-problems.md](docs/open-problems.md)) showed that even on
-success, verifying the projected ~14 GiB certificate would need an estimated
-11–18 GB of RAM — more than this machine has. **We therefore report Z15 as
-unconfirmed**, with the exact input formula, its SHA-256 hash, the full solver
-statistics, and a concrete completion plan for anyone with a bigger machine.
-This is a deliberate act of intellectual honesty: one solver's word, however
-plausible, is not the standard this repository sells.
+clauses, sizes ≥ 3) **infeasible in ~15 minutes**. The independent confirmation
+originally did not finish: CaDiCaL ran for **12 h 56 m** without a verdict and
+was stopped, because a feasibility analysis showed that verifying the projected
+~14 GiB DRAT certificate would need 11–18 GB of RAM — more than this machine
+has. This repository therefore first shipped Z15 as *honestly unconfirmed*,
+with the frozen formula, its SHA-256, and a completion plan (open problem 1).
+**Two days later the plan paid off on the very same laptop.** The wall was the
+proof *format*, not the proof: switching CaDiCaL to **LRAT** output — which a
+checker can verify in a single forward stream, holding the formula rather than
+the proof in memory — dissolved the verifier bottleneck entirely. An unbounded
+rerun on the byte-identical frozen CNF (sha256 `e6c732cf…`) returned **UNSAT
+after 20 h 26 m** (73,545 s, max RSS 4.8 GB), emitting a **147 GB text LRAT
+certificate** (sha256 `9d8b6b72…`) that `lrat-check` **verified in 22.6
+minutes** (max live clauses = the formula's 28,850,111 — RAM tracks the
+formula, not the proof). The trajectory replayed the historic run and then
+collapsed to a verdict in the final half hour — CDCL refutations end without
+warning, exactly as this README warns below. Z15 now meets *and exceeds* the
+project standard: two independent methods (native CP-SAT model + adder-encoded
+CNF) **and** a machine-verified certificate. Full record:
+[Z15-CLOSED.md](https://github.com/simone-albanese/frankl-transitive-sat/blob/main/results/Z15-CLOSED.md)
+in the successor repository, where the run was executed.
 
 To the best of our knowledge, the certified multi-orbit results on 13 and 14
 points do not appear in the literature (the closest published result,
@@ -235,9 +245,14 @@ the DRAT trace grows at ~1.2 GiB/hour, and the *verifier* (drat-trim) holds the
 whole proof in RAM. On the measured Z14 baseline, verifying the projected Z15
 certificate extrapolates to 11–18 GB of resident memory. The machine has 16.
 
-So the frontier of this project is not "we ran out of cleverness" but "we ran
+So the frontier of this project was not "we ran out of cleverness" but "we ran
 out of RAM in the checker, and we can tell you exactly how much you would
-need." The full analysis — measured versus extrapolated, clearly separated —
+need." *Epilogue, 14 Aug 2026:* the wall fell — not to a bigger machine, but to
+a better certificate format. LRAT proofs verify in a forward stream with memory
+proportional to the formula, not the proof; the 147 GB Z15 certificate was
+checked in 22.6 minutes on this same 16 GB laptop (see Result 3). The analysis
+below is kept as written: it is the reasoning that made the solution findable.
+The full analysis — measured versus extrapolated, clearly separated —
 plus three concrete continuation routes (a 2^k sharding plan that fits small
 machines, a bigger-RAM monolithic route, and encoding improvements) is in
 [docs/open-problems.md](docs/open-problems.md). $\mathbb{Z}_{16}$ (4,114 orbits)

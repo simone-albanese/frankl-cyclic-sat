@@ -1,6 +1,12 @@
 # Z15 — partial result record (run stopped without verdict)
 
-**Status: NOT decided to this project's standard.** The project requires either
+> **✅ SUPERSEDED 14 Aug 2026: Z15 is now CLOSED — UNSAT with a verified LRAT
+> certificate** (147 GB, verified in 22.6 min by streaming `lrat-check` on this
+> same machine; the wall described below was the DRAT *format*, not the proof).
+> See [Z15-RESOLVED.md](Z15-RESOLVED.md). This file is kept unchanged below as
+> the historical record of the stop decision.
+
+**Status (historical): NOT decided to this project's standard.** The project requires either
 two independent exact methods in agreement, or one method plus a verified proof
 certificate. For Z15 (rotation-invariant union-closed families on 15 points,
 member sets of size ≥ 3) we have exactly **one** completed exact method.
