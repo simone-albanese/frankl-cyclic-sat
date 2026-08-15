@@ -335,6 +335,15 @@ failed and the operational lessons learned, is documented in
 [docs/ai-workflow.md](docs/ai-workflow.md); the raw diary (1,297 lines,
 Italian) is preserved verbatim in [STATE/journal.md](STATE/journal.md).
 
+The v1.1.0 epilogue — the run that closed Z15 — was made the other way
+around: **interactive Claude Code sessions** in the
+[sequel repository](https://github.com/simone-albanese/frankl-transitive-sat),
+with the human owner deciding at the forks and the agent executing, including
+the detached 20-hour CaDiCaL run (built to survive session restarts, with
+watchdogs and automatic streaming verification). Same constitution, same
+verification standard, different tempo; the sequel's *How this was made*
+section tells that half of the story.
+
 ## Contributing
 
 The most valuable contribution right now is **independent confirmation of
