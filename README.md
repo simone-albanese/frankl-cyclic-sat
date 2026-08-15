@@ -303,7 +303,7 @@ finding the *tightest* symmetric families — is in
 | [cegar.py](cegar.py), [anneal.py](anneal.py), [structured.py](structured.py) | explored side roads (lazy closure, local search, constructions) |
 | [results/](results/) | verdict records, certificate hashes, solver logs |
 | [setup_frankl.sh](setup_frankl.sh) | the genesis artifact: a self-extracting script that recreates the project's seed files (verified byte-identical to the tracked copies) |
-| [RISULTATI.md](RISULTATI.md), [STATE/](STATE/), [CLAUDE.md](CLAUDE.md) | the original working notes and diary (Italian) — primary sources |
+| [RISULTATI.md](RISULTATI.md), [STATE/](STATE/), [CLAUDE.md](CLAUDE.md) | the original working notes (now translated to English) and the diary and agent constitution (kept verbatim in Italian as primary sources) |
 
 ## How this was made
 

@@ -1,48 +1,52 @@
-# Sessione di ricerca: controesempi alla congettura union-closed (Frankl)
+# Research session: counterexamples to the union-closed (Frankl) conjecture
 
-Data: 10 agosto 2026 · Ambiente: Python 3.12.3, OR-tools CP-SAT · Aritmetica dei verdetti: solo interi (condizione di controesempio: 2·maxfreq < |F|).
+*("Risultati" = results; the filename is kept for link stability.)*
 
-## 1. Stato dell'arte (Passo 0, sintesi con fonti nella chat)
+Date: 10 August 2026 · Environment: Python 3.12.3, OR-tools CP-SAT · Verdict arithmetic: integers only (counterexample condition: 2·maxfreq < |F|).
 
-La congettura è aperta. Bound inferiori sulla frequenza massima: Gilmer 2022 (0,01·|F|), poi (3−√5)/2 ≈ 0,38197 (Alweiss–Huang–Sellke; Chase–Lovett; Sawin; Pebody), raffinato a ≈ 0,38234 (Yu) e ≈ 0,3824–0,3827 (Liu, a seconda della fonte). Chase–Lovett: (3−√5)/2 è ottimale per la versione approssimata (barriera per i metodi entropici). Verifiche esaustive: universi con ≤ 12 elementi (Živković–Vučković 2017); famiglie con ≤ 46 insiemi; se il controesempio minimo ha m elementi, ogni controesempio ha ≥ 4m−1 insiemi (Lo Faro; Roberts–Simpson) → con m ≥ 13, |F| ≥ 51. Un controesempio non contiene insiemi di taglia 1 o 2 (Sarvate–Renaud). WLOG ∅ ∈ F (aggiungerlo preserva la chiusura e abbassa tutte le frequenze relative). Caso transitivo: Aaronson–Ellis–Leader 2021 dimostrano la congettura per la famiglia di TUTTE le unioni dei traslati di UN insieme fisso in un gruppo abeliano (caso 1-seme); il caso multi-orbita non risulta coperto.
+## 1. State of the art (Step 0, summary with sources in the chat)
 
-## 2. Controlli di protocollo (tutti superati)
+The conjecture is open. Lower bounds on the maximum frequency: Gilmer 2022 (0.01·|F|), then (3−√5)/2 ≈ 0.38197 (Alweiss–Huang–Sellke; Chase–Lovett; Sawin; Pebody), refined to ≈ 0.38234 (Yu) and ≈ 0.3824–0.3827 (Liu, depending on the source). Chase–Lovett: (3−√5)/2 is optimal for the approximate version (a barrier for entropy methods). Exhaustive verifications: universes with ≤ 12 elements (Živković–Vučković 2017); families with ≤ 46 sets; if the minimal counterexample has m elements, every counterexample has ≥ 4m−1 sets (Lo Faro; Roberts–Simpson) → with m ≥ 13, |F| ≥ 51. A counterexample contains no sets of size 1 or 2 (Sarvate–Renaud). WLOG ∅ ∈ F (adding it preserves closure and lowers all relative frequencies). Transitive case: Aaronson–Ellis–Leader 2021 prove the conjecture for the family of ALL unions of the translates of ONE fixed set in an abelian group (the 1-seed case); the multi-orbit case does not appear to be covered.
 
-- Negativo: P([4]) → |F|=16, maxf=8, margine 2·maxf−|F| = 0 esatto (tight, non controesempio).
-- Validatore: {{0},{1}} rifiutata (manca {0,1}). Questo controllo ha scoperto un bug reale di flusso nel checker n.1 (violazioni <3 marcate come "chiuso"), corretto prima di ogni run.
-- Detector: sei singleton → 2·maxf=2 < 6 rilevato; verdetto complessivo correttamente False (famiglia non chiusa).
-- Accordo checker1 (bitmask) / checker2 (frozenset+Counter, implementazione indipendente): 50/50 su chiusure casuali.
+## 2. Protocol checks (all passed)
 
-## 3. Risultato principale (SAT esatto, famiglie cicliche-invarianti)
+- Negative control: P([4]) → |F|=16, maxf=8, margin 2·maxf−|F| = 0 exactly (tight, not a counterexample).
+- Validator: {{0},{1}} rejected ({0,1} missing). This check uncovered a real control-flow bug in checker no. 1 (< 3 violations marked as "closed"), fixed before any run.
+- Detector: six singletons → 2·maxf=2 < 6 detected; overall verdict correctly False (family not union-closed).
+- Agreement between checker1 (bitmask) and checker2 (frozenset+Counter, independent implementation): 50/50 on random closures.
 
-Modello: variabile booleana per ognuna delle 630 orbite cicliche non banali di Z₁₃ (∅ e Z₁₃ sempre inclusi; i loro contributi al margine si cancellano). Margine M = Σ (2s−13)x_O; chiusura: 1.863.311 clausole ¬x₁∨¬x₂∨x_target.
+## 3. Main result (exact SAT, cyclic-invariant families)
 
-- Controlli pipeline: Z₇ e Z₁₁ → INFEASIBLE (come impone la teoria: congettura vera per m ≤ 12). Encoding validato.
-- **Z₁₃, vincolo M ≤ −1: INFEASIBLE/UNSAT, ora con certificato verificato.** Quattro conferme concordi e via via più forti: (1) CP-SAT, vincolo lineare nativo, 72 s; (2) pysat/CaDiCaL 1.5.3, encoding ad addizionatori binari validato per forza bruta, UNSAT in 325,6 s; (3) CaDiCaL 2.x compilato da sorgente sul DIMACS esportato (4752 variabili, 1.884.943 clausole), s UNSATISFIABLE con emissione di prova; (4) **certificato DRAT (87 MB) verificato da drat-trim: s VERIFIED in 266,75 s** (481.643 lemmi nel core, ~39,8 M passi di risoluzione). L'intera catena dump→solve→verify è stata prima validata end-to-end su Z₇ e Z₁₁ (UNSAT + VERIFIED). Residuo di fiducia: la sola correttezza della *generazione* della formula, mitigata da due encoder indipendenti concordi e dai controlli. Poiché ogni gruppo transitivo su 13 punti contiene un 13-ciclo (Cauchy), il risultato copre ogni famiglia invariante sotto QUALSIASI gruppo transitivo su 13 punti, ed estende (sperimentalmente) il caso 1-seme di Aaronson–Ellis–Leader al caso multi-seme su Z₁₃.
-- Ottimizzazione: min M = 0 (OPTIMAL), raggiunto solo dal power set (|F|=8192) — quasi-controesempio tight banale.
-- Regione ammissibile per un controesempio (taglie ≥ 3): min M = 11 (OPTIMAL), |F|=15 (orbita dei 12-set + Z₁₃ + ∅), f = 13, ratio 13/15 ≈ 0,867. Cross-check: l'enumerazione indipendente dà margine scalato 143 = 13·11 per la stessa famiglia.
+Model: one Boolean variable for each of the 630 nontrivial cyclic orbits of Z₁₃ (∅ and Z₁₃ always included; their contributions to the margin cancel). Margin M = Σ (2s−13)x_O; closure: 1,863,311 clauses ¬x₁∨¬x₂∨x_target.
 
-## 4. Copertura complementare
+- Pipeline checks: Z₇ and Z₁₁ → INFEASIBLE (as the theory dictates: the conjecture is true for m ≤ 12). Encoding validated.
+- **Z₁₃, constraint M ≤ −1: INFEASIBLE/UNSAT, now with a verified certificate.** Four concordant and progressively stronger confirmations: (1) CP-SAT, native linear constraint, 72 s; (2) pysat/CaDiCaL 1.5.3, binary-adder encoding validated by brute force, UNSAT in 325.6 s; (3) CaDiCaL 2.x compiled from source on the exported DIMACS (4752 variables, 1,884,943 clauses), s UNSATISFIABLE with proof emission; (4) **DRAT certificate (87 MB) verified by drat-trim: s VERIFIED in 266.75 s** (481,643 lemmas in the core, ~39.8 M resolution steps). The entire dump→solve→verify chain was first validated end-to-end on Z₇ and Z₁₁ (UNSAT + VERIFIED). Residual trust gap: only the correctness of the formula *generation*, mitigated by two independent, concordant encoders and by the checks. Since every transitive group on 13 points contains a 13-cycle (Cauchy), the result covers every family invariant under ANY transitive group on 13 points, and extends (experimentally) the 1-seed case of Aaronson–Ellis–Leader to the multi-seed case on Z₁₃.
+- Optimization: min M = 0 (OPTIMAL), attained only by the power set (|F|=8192) — the trivial tight near-counterexample.
+- Feasible region for a counterexample (sizes ≥ 3): min M = 11 (OPTIMAL), |F|=15 (the orbit of the 12-sets + Z₁₃ + ∅), f = 13, ratio 13/15 ≈ 0.867. Cross-check: the independent enumeration gives scaled margin 143 = 13·11 for the same family.
 
-- Enumerazione esaustiva 1-seme: Z₁₃ 630/630, Z₁₄ 1180/1180, Z₁₅ 666/666 (solo taglie ≤ 6, parziale dichiarato): zero candidati; tight solo power set (eventualmente "a blocchi"). Conferma sperimentale del teorema AEL.
-- Campione 800 coppie di semi su Z₁₃: zero candidati; miglior margine M = 32 (|F|=54, ratio 43/54 ≈ 0,796).
-- Annealing sui generatori (m ≤ 16): modalità libera converge al power set (margine 0 — calibrazione riuscita); modalità con generatori di taglia ≥ 3 (48 run): miglior margine 2 (|F|=10, ratio 3/5 = 0,6). Nessun margine negativo.
-- Costruzioni strutturate su 13 punti (tutte con conteggi previsti a mano e verificati): PG(2,3) → |F|=704, ratio 507/704 ≈ 0,720; STS(13) ciclico → |F|=4032, ratio 1205/2016 ≈ 0,598 (la migliore ratio "strutturata"); QR(13) → |F|=210, ratio 27/35 ≈ 0,771; intervalli (run ≥ 3) → |F|=522, ratio 37/58 ≈ 0,638. Up-set esclusi a priori (maxf ≥ |F|/2 per iniezione S ↦ S∪{x}).
+## 4. Complementary coverage
 
-## 5. Seconda fase: tentativi su Z₁₄/Z₁₅ e lezioni
+- Exhaustive 1-seed enumeration: Z₁₃ 630/630, Z₁₄ 1180/1180, Z₁₅ 666/666 (sizes ≤ 6 only, declared partial): zero candidates; tight only for the power set (possibly "blockwise"). Experimental confirmation of the AEL theorem.
+- Sample of 800 seed pairs on Z₁₃: zero candidates; best margin M = 32 (|F|=54, ratio 43/54 ≈ 0.796).
+- Annealing over the generators (m ≤ 16): free mode converges to the power set (margin 0 — successful calibration); mode with generators of size ≥ 3 (48 runs): best margin 2 (|F|=10, ratio 3/5 = 0.6). No negative margin.
+- Structured constructions on 13 points (all with counts predicted by hand and verified): PG(2,3) → |F|=704, ratio 507/704 ≈ 0.720; cyclic STS(13) → |F|=4032, ratio 1205/2016 ≈ 0.598 (the best "structured" ratio); QR(13) → |F|=210, ratio 27/35 ≈ 0.771; intervals (runs ≥ 3) → |F|=522, ratio 37/58 ≈ 0.638. Up-sets excluded a priori (maxf ≥ |F|/2 by the injection S ↦ S∪{x}).
 
-Il modello monolitico CP-SAT per Z₁₄ (7,32 M clausole) supera la RAM disponibile (OOM-kill a 3,94 GB documentato). Due strade esplorate: (a) CEGAR (chiusura lazy: si parte dal solo vincolo di margine e si aggiungono clausole solo quando violate) — corretto per costruzione e validato su Z₇/Z₁₁, ma su Z₁₃ il rilassamento è risultato *più difficile* da refutare del modello completo (timeout: meno vincoli possono rendere più arduo l'UNSAT); (b) pipeline pysat/CaDiCaL con clausole in **streaming** (memoria C-side: build di Z₁₄ in 13 s, ~930 MB stabili) e margine via encoder ad addizionatori binari. La (b) ha prodotto la conferma indipendente di Z₁₃; su Z₁₄ (ristretto a taglie ≥ 3, restrizione valida per ogni controesempio, Sarvate–Renaud) il run è rimasto senza verdetto nel budget di sessione: esito onesto UNKNOWN, con il collo di bottiglia identificato nella propagazione debole dell'encoding pseudo-Booleano rispetto al vincolo lineare nativo.
+## 5. Second phase: attempts on Z₁₄/Z₁₅ and lessons
 
-## 6. Valutazione onesta
+The monolithic CP-SAT model for Z₁₄ (7.32 M clauses) exceeds the available RAM (documented OOM-kill at 3.94 GB). Two routes explored: (a) CEGAR (lazy closure: start from the margin constraint alone and add clauses only when violated) — correct by construction and validated on Z₇/Z₁₁, but on Z₁₃ the relaxation turned out to be *harder* to refute than the full model (timeout: fewer constraints can make UNSAT harder); (b) a pysat/CaDiCaL pipeline with **streamed** clauses (C-side memory: Z₁₄ built in 13 s, ~930 MB steady) and margin via a binary-adder encoder. Route (b) produced the independent confirmation of Z₁₃; on Z₁₄ (restricted to sizes ≥ 3, a restriction valid for every counterexample, Sarvate–Renaud) the run remained without a verdict within the session budget: honest outcome UNKNOWN, with the bottleneck identified in the weak propagation of the pseudo-Boolean encoding compared to the native linear constraint.
 
-Il passo di certificazione chiude il primo dei "prossimi passi" della prima fase: il teorema di sessione su Z₁₃ non dipende più dalla fiducia in un singolo solver. Restano non decisi Z₁₄ e Z₁₅ multi-orbita (due run CaDiCaL da 20+ minuti senza verdetto; CP-SAT monolitico OOM a 3,94 GB): esito dichiarato UNKNOWN.
+## 6. Honest assessment
 
-Nessun candidato: ogni famiglia chiusa esaminata ha margine ≥ 0, e ratio < 0,5 non è mai comparsa (coerente col tripwire: mai nulla vicino a 0,382). Il contributo non banale della sessione è la decisione esatta del caso Z₁₃-invariante generale (multi-orbita), che non risulta coperto dalla letteratura, insieme al margine minimo certificato M = 11 nella regione senza taglie 1–2. Limiti: Z₁₄ multi-orbita non deciso (7,3 M clausole oltre la memoria disponibile), Z₁₅ SAT non tentato, annealing euristico, CP-SAT senza certificato verificabile.
+The certification step closes the first of the first phase's "next steps": the session theorem on Z₁₃ no longer depends on trusting a single solver. Multi-orbit Z₁₄ and Z₁₅ remain undecided (two CaDiCaL runs of 20+ minutes without a verdict; monolithic CP-SAT OOM at 3.94 GB): outcome declared UNKNOWN.
 
-## 6. Prossimi passi
+No candidates: every union-closed family examined has margin ≥ 0, and a ratio < 0.5 never appeared (consistent with the tripwire: never anything near 0.382). The session's nontrivial contribution is the exact decision of the general Z₁₃-invariant case (multi-orbit), which does not appear to be covered by the literature, together with the certified minimum margin M = 11 in the region without sizes 1–2. Limitations: multi-orbit Z₁₄ undecided (7.3 M clauses beyond the available memory), Z₁₅ SAT not attempted, heuristic annealing, CP-SAT without a verifiable certificate.
 
-(1) ~~Certificato DRAT per Z₁₃~~ — fatto e verificato in questa sessione. (2) Z₁₄/Z₁₅ multi-orbita con encoding compatto (variabili ausiliarie di coppia o solver PB nativo). (3) Gruppi transitivi su 14–16 punti privi di cicli lunghi (dove il corollario di Cauchy non si applica). (4) Local search con obiettivi surrogati (media taglie vs m/2) e mosse su orbite anziché su generatori.
+## 6. Next steps
 
-## File
+(1) ~~DRAT certificate for Z₁₃~~ — done and verified in this session. (2) Multi-orbit Z₁₄/Z₁₅ with a compact encoding (pairwise auxiliary variables or a native PB solver). (3) Transitive groups on 14–16 points with no long cycles (where the Cauchy corollary does not apply). (4) Local search with surrogate objectives (mean size vs m/2) and moves on orbits rather than on generators.
 
-`ucs_core.py` (bitmask, chiusura, checker n.1) · `pb_adder.py` (encoder PB auto-validato) · `sat2_cyclic.py` (pipeline pysat/CaDiCaL) · `cegar.py` (raffinamento lazy) · `dump_dimacs.py` (esportazione DIMACS per la catena di certificazione; z13.cnf e la prova DRAT da 87 MB sono rigenerabili con dump_dimacs + CaDiCaL + drat-trim) · `checker2.py` (verificatore indipendente) · `controls.py` (controlli obbligatori) · `cyclic_enum.py` (enumerazione) · `sat_cyclic.py` (CP-SAT) · `anneal.py` (ricerca locale) · `structured.py` (costruzioni con assert manuali).
+## Files
+
+`ucs_core.py` (bitmask, closure, checker no. 1) · `pb_adder.py` (self-validated PB encoder) · `sat2_cyclic.py` (pysat/CaDiCaL pipeline) · `cegar.py` (lazy refinement) · `dump_dimacs.py` (DIMACS export for the certification chain; z13.cnf and the 87 MB DRAT proof can be regenerated with dump_dimacs + CaDiCaL + drat-trim) · `checker2.py` (independent verifier) · `controls.py` (mandatory checks) · `cyclic_enum.py` (enumeration) · `sat_cyclic.py` (CP-SAT) · `anneal.py` (local search) · `structured.py` (constructions with manual asserts).
+
+*Originally written in Italian as the campaign's working record; translated to English on 15 Aug 2026 (the Italian original is preserved in git history).*
