@@ -100,11 +100,15 @@ group on 13 points (13 being prime) contains a 13-cycle. Consequence: settling
 the rotation-invariant case on 13 points automatically settles the case of
 families invariant under *any* transitive symmetry group on 13 points. Symmetry
 was not a restriction of convenience — on 13 points it was the whole transitive
-story.
+story. And the story did not stop at the prime: together with the theorems of
+the [sequel repository](https://github.com/simone-albanese/frankl-transitive-sat)
+for degrees 14 and 15, **the transitive case of Frankl's conjecture is now
+closed up to 15 points.**
 
 ## What was established
 
-Three results, in decreasing order of certainty. Precise statements, models and
+Three results, all decided to the same standard — two independent exact methods
+plus a verified certificate. Precise statements, models and
 proofs of the supporting lemmas are in [docs/mathematics.md](docs/mathematics.md);
 every number below is anchored to a log file in this repository and discussed in
 [docs/results.md](docs/results.md).
