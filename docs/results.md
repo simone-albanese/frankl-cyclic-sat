@@ -138,11 +138,16 @@ Regeneration is in any case deterministic for the CNF (same generator code ⇒
 same bytes), and a DRAT re-emitted by the same CaDiCaL commit on the same CNF
 verifies identically even if not byte-identical.
 
-## 3. $\mathbb{Z}_{15}$ — CP-SAT says infeasible; independent confirmation not completed
+## 3. $\mathbb{Z}_{15}$ — CP-SAT says infeasible; independent confirmation completed 14 Aug 2026
 
-**Status: one exact method, no certificate — reported as unconfirmed.** The
-complete factual record is [results/Z15-PARTIAL.md](../results/Z15-PARTIAL.md);
-summary:
+> **Update:** Z15 is now decided to full standard — CaDiCaL UNSAT in 73,545 s
+> with a 147 GB LRAT certificate verified in streaming (1,359 s); see
+> [results/Z15-RESOLVED.md](../results/Z15-RESOLVED.md). The section below is
+> the historical record of the first attempt, kept as written.
+
+**Status (historical): one exact method, no certificate — reported as
+unconfirmed at v1.0.0.** The complete factual record of the first attempt is
+[results/Z15-PARTIAL.md](../results/Z15-PARTIAL.md); summary:
 
 **Instance.** 2,190 nontrivial orbits (measured periods $\{3\!:\!2,\ 5\!:\!6,\
 15\!:\!2182\}$, sanity-checked exactly), sizes ≥ 3. Closure clauses:
@@ -212,13 +217,16 @@ A candid audit of the trust chain, strongest link first:
    encoders (different margin formalisms) agree on five universes; the control
    instances encode theorems with known answers; the orbit arithmetic is
    re-derived and re-checked in [mathematics.md](mathematics.md) §4–5.
-3. **CP-SAT** has no certificate; it is one of the two independent methods, and
-   on Z15 currently the only one — which is exactly why Z15 is labeled
-   unconfirmed.
+3. **CP-SAT** has no certificate; it is one of the two independent methods.
+   (At v1.0.0 it was the only completed method on Z15, which is why Z15 was
+   then labeled unconfirmed; since 14 Aug 2026 Z15 also has CaDiCaL's UNSAT
+   and a verified LRAT certificate.)
 4. **Upgrade path for the skeptical**: re-verify the certificates with a
-   *formally verified* checker (e.g. cake_lpr) — open problem 6. drat-trim
-   itself is unverified C; running a verified checker would shrink the trusted
-   base to the formula generator alone.
+   *formally verified* checker (e.g. cake_lpr) — open problem 5. drat-trim
+   itself is unverified C; running a verified checker shrinks the trusted
+   base to the formula generator alone. (Partially done in the sequel
+   repository: cake_lpr has re-verified 9 of 10 LRAT certificates; the
+   147 GB Z15 proof needs a 64 GB machine.)
 
 ## Timeline (for the record)
 

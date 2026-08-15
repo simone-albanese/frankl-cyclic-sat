@@ -201,10 +201,10 @@ Aaronson–Ellis–Leader for single-orbit generated families.
 
 ## 8. What is decided, and what is not
 
-- Decided (and certified): *the rotation-invariant case* on 13 and 14 points,
-  and by §6 the full transitive case on 13 points.
-- Decided by a single method (unconfirmed): the rotation-invariant case on 15
-  points. See [results/Z15-PARTIAL.md](../results/Z15-PARTIAL.md).
+- Decided (and certified): *the rotation-invariant case* on 13, 14 and 15
+  points (for 15, see [results/Z15-RESOLVED.md](../results/Z15-RESOLVED.md)),
+  and by §6 the full transitive case on 13 points; the sequel repository
+  extends the transitive case to 14 and 15 points.
 - **Not** decided by any of this: Frankl's conjecture for general
   (asymmetric) families on ≥ 13 points. A general counterexample, if one
   exists, simply need not be symmetric. The contribution of symmetry results is

@@ -2,11 +2,11 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21900943.svg)](https://doi.org/10.5281/zenodo.21900943)
 
-**A computer-assisted case study: no rotation-symmetric counterexample exists on
-13, 14 — or 15 — points, each with machine-checkable certificates. The 15-point
-case first ran into the memory wall of a 16 GB laptop, was published here as an
-open problem, and was closed two days later on the same laptop by switching the
-certificate format to one that verifies in a stream (see Result 3).**
+**A computer-assisted case study: no rotation-symmetric counterexample to
+Frankl's conjecture exists on 13, 14 or 15 points. Each case was decided by two
+independent exact methods and carries a machine-checkable, verified proof
+certificate. (The 15-point certificate earned itself a story on the way —
+see Result 3.)**
 
 This repository contains everything: the mathematics, the code, the solver logs,
 the proof-certificate hashes, the resource measurements, the open problems, and
@@ -213,28 +213,36 @@ Full provenance (solver commits, exact commands, log paths):
 | | $\mathbb{Z}_7$ | $\mathbb{Z}_{11}$ | $\mathbb{Z}_{13}$ | $\mathbb{Z}_{14}$ | $\mathbb{Z}_{15}$ |
 |---|---|---|---|---|---|
 | nontrivial orbits | 18 | 186 | 630 | 1,180 | 2,190 |
-| role | control | control | result | result | attempt |
+| role | control | control | result | result | result |
 | size restriction | none | none | none | ≥ 3 | ≥ 3 |
 | CNF variables | 120 | 1,382 | 4,752 | 5,184 | 16,856 |
 | CNF clauses | 897 | 123,568 | 1,884,943 | 7,342,059 | 28,850,111 |
 | CP-SAT verdict | INFEASIBLE, <1 s | INFEASIBLE, ~1 s | INFEASIBLE, 15.1 s (72 s†) | INFEASIBLE, ~1 min | INFEASIBLE, 889 s |
-| CaDiCaL verdict | UNSAT | UNSAT | UNSAT† | UNSAT, 2,240 s | **none** (stopped at 46,474 s) |
-| DRAT certificate | 2 KB | 3.6 MB | 87 MB† | 2.24 GB | 11.87 GiB partial — *not a certificate* |
-| drat-trim | VERIFIED | VERIFIED | VERIFIED, 267 s† | VERIFIED, 1,736 s | not run (est. 11–18 GB RAM) |
+| CaDiCaL verdict | UNSAT | UNSAT | UNSAT† | UNSAT, 2,240 s | UNSAT, 73,545 s |
+| proof certificate | 2 KB DRAT | 3.6 MB DRAT | 87 MB DRAT† | 2.24 GB DRAT | 147 GB LRAT |
+| verification | VERIFIED | VERIFIED | VERIFIED, 267 s† | VERIFIED, 1,736 s | VERIFIED, 1,359 s |
+
+(The first Z15 attempt stopped without a verdict at 46,474 s, blocked by the
+projected RAM of DRAT verification; the certified run above uses the
+streaming-verifiable LRAT format instead — the story is in Result 3 and
+[results/Z15-RESOLVED.md](results/Z15-RESOLVED.md).)
 
 The tiny $\mathbb{Z}_7$ and $\mathbb{Z}_{11}$ certificates are checked into the
 repository (`results/dimacs/`), so you can run drat-trim on a real certificate
 seconds after cloning. The large CNF/DRAT files exceed GitHub's limits and are
 excluded from git; they are deterministic outputs of the pipeline, their
-SHA-256 hashes are recorded in [results/FOUND.sha256](results/FOUND.sha256) and
-[results/Z15-PARTIAL.md](results/Z15-PARTIAL.md), and the three with evidential
-value (the Z14 CNF + verified certificate, and the Z15 CNF) are downloadable
-xz-compressed from
-[release v1.0.0](https://github.com/simone-albanese/frankl-cyclic-sat/releases/tag/v1.0.0)
-and permanently archived at Zenodo:
-[doi:10.5281/zenodo.21900943](https://doi.org/10.5281/zenodo.21900943).
+SHA-256 hashes are recorded in [results/FOUND.sha256](results/FOUND.sha256),
+[results/Z15-PARTIAL.md](results/Z15-PARTIAL.md) and
+[results/Z15-RESOLVED.md](results/Z15-RESOLVED.md), and the artifacts with
+evidential value are downloadable xz-compressed and permanently archived at
+Zenodo: the Z14 CNF + verified certificate and the Z15 CNF in
+[v1.0.0, doi:10.5281/zenodo.21900943](https://doi.org/10.5281/zenodo.21900943)
+(also on the
+[GitHub release](https://github.com/simone-albanese/frankl-cyclic-sat/releases/tag/v1.0.0)),
+and the 147 GB Z15 LRAT certificate (19 GB compressed) in
+[v1.1.0, doi:10.5281/zenodo.21939129](https://doi.org/10.5281/zenodo.21939129).
 
-## Where it stopped: the 16 GB wall
+## The 16 GB wall (where the first campaign stopped, and how it fell)
 
 The honest climax of this project is not a theorem but a resource analysis.
 Between 13 and 15 points, every cost multiplied by roughly 4× per step — except
