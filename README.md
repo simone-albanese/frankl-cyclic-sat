@@ -321,9 +321,19 @@ finding the *tightest* symmetric families — is in
 
 Every computation in this repository was planned, launched, monitored and
 recorded by an AI agent running in an autonomous loop built on
-**[Claude Code](https://claude.com/claude-code)**, Anthropic's terminal agent
-(model pinned to Claude Fable 5, no fallback): ~160 short fresh-context
-headless sessions over two days, each spawned by a 100-line bash driver
+**[Claude Code](https://claude.com/claude-code)**, Anthropic's terminal agent.
+**Model**: Claude Fable 5 (`claude-fable-5`), pinned three ways — the driver's
+`--model` flag, the repo's settings file, and `/model` in interactive
+sessions — with **no fallback model configured**, so an API overload produces
+a retryable error rather than a silent downgrade of the model doing the
+mathematics. **Reasoning effort**: a per-task dial, not a fixed maximum — the
+driver re-reads `STATE/effort.txt` every round and passes it as `--effort`
+(high reserved for the genuinely hard nodes such as the SAT decisions, medium
+for bookkeeping; a fixed maximum would have burned the token budget on
+babysitting). **Token accounting was not systematically tracked** — the
+honest proxies are the session and iteration counts reported here and in
+[docs/ai-workflow.md](docs/ai-workflow.md). The campaign ran as ~160 short
+fresh-context headless sessions over two days, each spawned by a 100-line bash driver
 ([scripts/loop.sh](scripts/loop.sh)) with one instruction — read the
 constitution and the handoff file, execute one atomic task, terminate — under
 hard resource budgets, OS-level watchdogs, and a protocol that forbids
