@@ -332,7 +332,8 @@ driver re-reads `STATE/effort.txt` every round and passes it as `--effort`
 for bookkeeping; a fixed maximum would have burned the token budget on
 babysitting). **Token accounting was not systematically tracked** — the
 honest proxies are the session and iteration counts reported here and in
-[docs/ai-workflow.md](docs/ai-workflow.md). The campaign ran as ~160 short
+[docs/ai-workflow.md](docs/ai-workflow.md); the whole project ran within a
+consumer Claude subscription (Max 20×). The campaign ran as ~160 short
 fresh-context headless sessions over two days, each spawned by a 100-line bash driver
 ([scripts/loop.sh](scripts/loop.sh)) with one instruction — read the
 constitution and the handoff file, execute one atomic task, terminate — under
