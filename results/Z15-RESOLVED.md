@@ -48,9 +48,11 @@ repository (`results/logs/routeB_driver.log`).
 The run was executed in the successor repository
 [frankl-transitive-sat](https://github.com/simone-albanese/frankl-transitive-sat)
 (driver `scripts/routeB.sh`, full record `results/Z15-CLOSED.md`, solver and
-checker logs in `results/logs/`). The certificate is archived xz-compressed on
-Zenodo as a new version of this repository's dataset (concept DOI
-10.5281/zenodo.21900942).
+checker logs in `results/logs/`). The certificate is archived xz-compressed
+(19 GB, sha256 `fcd65ffc…`) on Zenodo as **v1.1.0** of this repository's
+dataset: **[doi:10.5281/zenodo.21939129](https://doi.org/10.5281/zenodo.21939129)**
+(concept DOI 10.5281/zenodo.21900942), published 15 Aug 2026, alongside the
+v1.0.0 artifacts (Z14 CNF + DRAT certificate, Z15 CNF).
 
 ## How to re-verify
 
